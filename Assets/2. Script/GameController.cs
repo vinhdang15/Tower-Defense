@@ -6,13 +6,17 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] UIController uiController;
-    public static int totalGold = 100;
-    public static int lives = 10;
+    [SerializeField] GameObject gameOverPanel;
+    public static int totalGold;
+    public static int lives;
     
     void Start()
     {
         uiController.UpdateGoldText(totalGold);
         uiController.UpdateLivesText(lives);
+        gameOverPanel.SetActive(false);
+        totalGold = 100;
+        lives = 10;
     }
 
     public static void AddGold(int gold)
@@ -31,9 +35,13 @@ public class GameController : MonoBehaviour
     {
         lives += i;
         Instance.uiController.UpdateLivesText(lives);
+        Instance.ShowGameOverPanel();
     }
 
-
+    void ShowGameOverPanel()
+    {
+        if(lives == 0) gameOverPanel.SetActive(true);
+    }
 
     private static GameController _instance;
     public static GameController Instance
