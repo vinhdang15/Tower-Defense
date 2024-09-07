@@ -1,0 +1,8 @@
+.vscode/
+Library/
+Logs/
+Packages/
+Temp/
+UserSettings/
+Assembly-CSharp.csproj
+Tower D Project.sln
