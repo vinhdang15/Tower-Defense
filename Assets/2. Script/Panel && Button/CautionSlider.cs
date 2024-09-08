@@ -10,12 +10,10 @@ public class CautionSlider : MonoBehaviour
     public float timeLimit;
     float timeRemain;
     float timeStart;
-    private CautionSlider instance;
     public bool isStartFirstWave;
 
     void Awake()
     {
-        instance = this;
         timeLimit = 6f;
         cautionFill = transform.GetChild(1).GetComponent<Image>();
     }
@@ -42,7 +40,7 @@ public class CautionSlider : MonoBehaviour
 
     public void StopCaution()
     {
-        foreach(Transform child in instance.transform)
+        foreach(Transform child in transform)
         {
             child.gameObject.SetActive(false);
         }
@@ -50,7 +48,7 @@ public class CautionSlider : MonoBehaviour
 
     public void StartUpCaution()
     {
-        foreach(Transform child in instance.transform)
+        foreach(Transform child in transform)
         {
             child.gameObject.SetActive(true);
         }

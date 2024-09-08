@@ -12,11 +12,11 @@ public class GameController : MonoBehaviour
     
     void Start()
     {
+        totalGold = 100;
+        lives = 10;
         uiController.UpdateGoldText(totalGold);
         uiController.UpdateLivesText(lives);
         gameOverPanel.SetActive(false);
-        totalGold = 100;
-        lives = 10;
     }
 
     public static void AddGold(int gold)

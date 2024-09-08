@@ -8,7 +8,6 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] CautionSlider cautionSlider;
     public int currentWave;
     [SerializeField] float timeBetweenEnemy;
-    float timeForNextWave = 10f;
     [SerializeField] List<EnemyEntry> enemyEntries = new List<EnemyEntry>();
     
     public bool cautionButtonClicked = false;
@@ -19,36 +18,26 @@ public class SpawnEnemy : MonoBehaviour
         currentWave = 0;
     }
 
-    void Start()
+    public void Initialize(SpawnEnemyManager manager)
     {
-        spawnEnemyManager = transform.parent.GetComponent<SpawnEnemyManager>();
+        spawnEnemyManager = manager;
         spawnEnemyManager.cautionSliders.Add(cautionSlider);
 
         GameObject canvas = GameObject.Find("Canvas - WorldSpace");
         cautionSlider.transform.SetParent(canvas.transform, true);
 
-        CheckToShowCaution();
-    }
-    void Update()
-    {
-        CheckToStartCoroutine();
+        ShowCautionAtFirstWave();
     }
 
-    void CheckToStartCoroutine()
+    public void StartSpawnCoroutine()
     {
-        if(cautionSlider.isStartFirstWave && StartInstantiateCoroutine == null)
-        {
-            StartInstantiateCoroutine = StartCoroutine(InstantiateEnemyWave());
-            cautionButtonClicked = false;
-            Debug.Log($"{transform.name}");
-        }
+        StartCoroutine(InstantiateEnemyWave());
     }
     
     IEnumerator InstantiateEnemyWave()
     {   
         for(int y = 0; y < enemyEntries.Count; y++)
         {
-            
             for(int i = 0; i < enemyEntries[y].numberEnemyInWave; i++)
             {
                 InstantiateEnemy(enemyEntries[y].enemy, i);
@@ -62,15 +51,17 @@ public class SpawnEnemy : MonoBehaviour
             spawnEnemyManager.CheckCurrentwaveIndex();
             // wait until all land are in the same wait
             yield return new WaitUntil(() => spawnEnemyManager.beginNextWave);
-
-            if (timeForNextWave - cautionSlider.timeLimit > 0 &&
+            float timeToShowCaution = spawnEnemyManager.timeForNextWave - cautionSlider.timeLimit;
+            if (timeToShowCaution > 0 &&
                 y < enemyEntries.Count - 1 &&
                 enemyEntries[y + 1].numberEnemyInWave > 0)              
             {        
-                yield return new WaitForSeconds(timeForNextWave - cautionSlider.timeLimit);
+                yield return new WaitForSeconds(timeToShowCaution);
                 cautionSlider.StartUpCaution();
-                Debug.Log(gameObject.name);
             }
+            // using yield here to sync time of all Spawn enemy instance,
+            // because atleast there is one path have show up caution button
+            yield return new WaitForSeconds(timeToShowCaution);
 
             // check if GetNextWave() is click or not
             float elapsed = 0f;
@@ -83,11 +74,11 @@ public class SpawnEnemy : MonoBehaviour
                 }
                 yield return new WaitForSeconds(0.1f);
                 elapsed += 0.1f;
-            }         
+            }     
         }
     }
 
-    void CheckToShowCaution()
+    void ShowCautionAtFirstWave()
     {
         if(enemyEntries[0].numberEnemyInWave == 0)
         {

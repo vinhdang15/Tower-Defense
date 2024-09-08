@@ -6,6 +6,8 @@ public class SpawnEnemyManager : MonoBehaviour
 {
     public int currentWave;
     public bool beginNextWave;
+    public bool beginSpawnCoroutine;
+    public float timeForNextWave = 8f;
     public List<CautionSlider> cautionSliders = new();
     [SerializeField] List<SpawnEnemy> spawnEnemies = new();
 
@@ -20,7 +22,12 @@ public class SpawnEnemyManager : MonoBehaviour
         {
             if(pathTransform.gameObject.activeSelf)
             {
-                spawnEnemies.Add(pathTransform.GetComponent<SpawnEnemy>());
+                var spawnEnemy = pathTransform.GetComponent<SpawnEnemy>();
+                if (spawnEnemy != null)
+                {
+                    spawnEnemies.Add(spawnEnemy);
+                    spawnEnemy.Initialize(this); // Initialize with manager reference
+                }
             }
         }
     }
@@ -41,16 +48,25 @@ public class SpawnEnemyManager : MonoBehaviour
     // button event
     public void GetNextWave()
     {
+        // Check if caution button first hit, then begin SpawnCoroutine at all path (each path is a spawnEnemy instance)
         foreach(SpawnEnemy spawnEnemy in spawnEnemies)
         {
             spawnEnemy.cautionButtonClicked = true;
+            if(beginSpawnCoroutine == false)
+            {
+                spawnEnemy.StartSpawnCoroutine();
+                // reset spawnEnemy.cautionButtonClicked if this if the caution button was first hit (mean begin Spawn Coroutine)
+                spawnEnemy.cautionButtonClicked = false;
+            }
         }
+        beginSpawnCoroutine = true;
 
         foreach(CautionSlider caution in cautionSliders)
         {
             caution.StopCaution();
             caution.isStartFirstWave = true;
-        }   
+        }
+       
     }
 
 }
