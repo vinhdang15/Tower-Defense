@@ -20,7 +20,7 @@ public class Bomb : ParapolBullet
         lineRenderer.positionCount = Trajectory_num;
         CalTrajectory();
         CalBulletSpeedAndAngle();
-        moveBulletCoroutine = StartCoroutine(MoveBullet());
+        moveBulletCoroutine = StartCoroutine(MoveParabolBullet());
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class Bomb : ParapolBullet
 
     public override void OnReachTargetLastPos()
     {
-        if (ReachTargetLastPos())
+        if (IsReachTargetLastPos())
         {
             StopCoroutine(moveBulletCoroutine);
             animator.SetTrigger("IsHitEnemy");

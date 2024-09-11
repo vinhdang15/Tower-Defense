@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
@@ -52,16 +53,19 @@ public class SpawnEnemy : MonoBehaviour
             // wait until all land are in the same wait
             yield return new WaitUntil(() => spawnEnemyManager.beginNextWave);
             float timeToShowCaution = spawnEnemyManager.timeForNextWave - cautionSlider.timeLimit;
+            yield return new WaitForSeconds(timeToShowCaution);
+
             if (timeToShowCaution > 0 &&
                 y < enemyEntries.Count - 1 &&
                 enemyEntries[y + 1].numberEnemyInWave > 0)              
             {        
-                yield return new WaitForSeconds(timeToShowCaution);
+                //yield return new WaitForSeconds(timeToShowCaution);
                 cautionSlider.StartUpCaution();
             }
             // using yield here to sync time of all Spawn enemy instance,
             // because atleast there is one path have show up caution button
-            yield return new WaitForSeconds(timeToShowCaution);
+
+            
 
             // check if GetNextWave() is click or not
             float elapsed = 0f;
@@ -74,7 +78,7 @@ public class SpawnEnemy : MonoBehaviour
                 }
                 yield return new WaitForSeconds(0.1f);
                 elapsed += 0.1f;
-            }     
+            }
         }
     }
 

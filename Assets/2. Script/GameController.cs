@@ -7,13 +7,13 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] UIController uiController;
     [SerializeField] GameObject gameOverPanel;
-    public static int totalGold;
-    public static int lives;
+    public static int totalGold = 100;
+    public static int lives = 10;
     
     void Start()
     {
-        totalGold = 100;
-        lives = 10;
+        // totalGold = 100;
+        // lives = 10;
         uiController.UpdateGoldText(totalGold);
         uiController.UpdateLivesText(lives);
         gameOverPanel.SetActive(false);

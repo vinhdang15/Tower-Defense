@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 6465660979379515613}
   - component: {fileID: 4259662525823776972}
   m_Layer: 10
-  m_Name: Enemy_Walking
+  m_Name: Robber
   m_TagString: GroundEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   healthBar: {fileID: 747040124858816785}
   animator: {fileID: 0}
   currentPos: {x: 0, y: 0}
-  enemyGold: 20
+  enemyGold: 5
   soldier: {fileID: 0}
 --- !u!1 &8558120193601302402
 GameObject:

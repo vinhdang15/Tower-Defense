@@ -44,7 +44,6 @@ public class UserInput : MonoBehaviour
             else
             {
                 hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Button"));
-                Debug.Log(panelController.isShowPanel);
             }
             
 

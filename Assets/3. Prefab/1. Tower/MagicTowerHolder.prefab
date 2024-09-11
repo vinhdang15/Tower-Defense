@@ -217,12 +217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1948b55d59a914b9abe45c174b08a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 1
+  spawnRate: 2
   SpawnPoint: {fileID: 7900178569398308145}
   spawnHolder: {fileID: 0}
   enemiesInRange: []
   currentLevel: 0
-  upgradeCosts: 140000001e00000028000000
+  upgradeCosts: 280000005a00000096000000
   detectionRanges:
   - 4
   - 5

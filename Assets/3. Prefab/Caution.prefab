@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8382d5060c6635d4b9d04a7878dc0dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 7
+  timeLimit: 12
   isStartFirstWave: 0
 --- !u!95 &4357010145642998812
 Animator:

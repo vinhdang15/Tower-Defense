@@ -122,7 +122,7 @@ public class ParapolBullet : Bullet
         }
     }
 
-    public virtual IEnumerator MoveBullet()
+    public virtual IEnumerator MoveParabolBullet()
     {        
         for (int i = 0; i < trajectoryPoints.Count; i++)
         {  

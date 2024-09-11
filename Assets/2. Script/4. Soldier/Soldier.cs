@@ -135,7 +135,8 @@ public class Soldier : Unit
             }
     }
 
-    public void HitEnemy()
+    // Animation event
+    public void AttackEnemy()
     {
         if(targetEnemy == null) return;
         targetEnemy.GetComponent<WalkingEnemy>().TakeDamage(damage);

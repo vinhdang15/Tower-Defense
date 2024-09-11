@@ -221,7 +221,7 @@ MonoBehaviour:
   spawnHolder: {fileID: 0}
   enemiesInRange: []
   currentLevel: 0
-  upgradeCosts: 0a000000140000001e000000
+  upgradeCosts: 1e0000002d00000050000000
   detectionRanges:
   - 6
   - 7

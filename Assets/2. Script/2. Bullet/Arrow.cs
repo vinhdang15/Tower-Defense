@@ -9,13 +9,15 @@ public class Arrow : ParapolBullet
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         instantiatePoint = transform.position;
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = Trajectory_num;
         CalTrajectory();
         CalBulletSpeedAndAngle();
-        moveBulletCoroutine = StartCoroutine(MoveBullet());
+        moveBulletCoroutine = StartCoroutine(MoveParabolBullet());
     }
 
     void Update()
@@ -28,11 +30,11 @@ public class Arrow : ParapolBullet
 
     public override void OnReachTargetLastPos()
     {
-        if(target != null) return;
-        if (ReachTargetLastPos())
+        if(target != null) return;       
+        if (IsReachTargetLastPos())
         {   
             StopCoroutine(moveBulletCoroutine);
-            animator.SetTrigger("IsHitGround");
+            animator.SetTrigger("IsHitGround");          
         }
     }
 

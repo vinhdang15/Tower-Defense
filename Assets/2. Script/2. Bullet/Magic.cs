@@ -11,14 +11,14 @@ public class Magic : Bullet
         StartCoroutine(Move());
     }
 
-    public override void HitTarget()
+    public override IEnumerator HitTarget()
     {
         if (target != null)
         {   
             StartTakeDamageCoroutine();
-            
             transform.GetComponent<SpriteRenderer>().enabled = false;
         }
+        yield return null;
     } 
 
     IEnumerator TakeDamage()

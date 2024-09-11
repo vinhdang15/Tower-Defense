@@ -58,6 +58,7 @@ public class SpawnEnemyManager : MonoBehaviour
                 // reset spawnEnemy.cautionButtonClicked if this if the caution button was first hit (mean begin Spawn Coroutine)
                 spawnEnemy.cautionButtonClicked = false;
             }
+            //Debug.Log(spawnEnemy.cautionButtonClicked);
         }
         beginSpawnCoroutine = true;
 
@@ -66,6 +67,7 @@ public class SpawnEnemyManager : MonoBehaviour
             caution.StopCaution();
             caution.isStartFirstWave = true;
         }
+        
        
     }
 
