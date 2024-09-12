@@ -302,7 +302,6 @@ public class PanelController : PracticalUtilities
             ResetCurrentButton();
         }
         isShowPanel = true;
-        Debug.Log("ShowPanel");
     }
 
     public void HideCurrentPanel()
@@ -310,7 +309,6 @@ public class PanelController : PracticalUtilities
         if(currentPanelTrans == null) return;
         HideObjectCoroutine(scaleUpCoroutine, currentPanelTrans, startScale);
         isShowPanel = false;
-        Debug.Log("hidePanel");
     }
 
     // ================== VISIBILITY BUTTON TICK

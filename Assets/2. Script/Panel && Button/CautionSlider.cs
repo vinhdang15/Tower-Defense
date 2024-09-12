@@ -6,22 +6,22 @@ using UnityEngine.UI;
 
 public class CautionSlider : MonoBehaviour
 {
-    Image cautionFill;
     public float timeLimit;
+    public bool isStartFirstWave;
+    Image cautionFill;
     float timeRemain;
     float timeStart;
-    public bool isStartFirstWave;
-
+    
     void Awake()
     {
         timeLimit = 6f;
         cautionFill = transform.GetChild(1).GetComponent<Image>();
     }
 
-    void Start()
-    {
-        timeLimit = 6f;
-    }
+    // void Start()
+    // {
+    //     timeLimit = 6f;
+    // }
 
     IEnumerator UpdateCautionFill()
     {

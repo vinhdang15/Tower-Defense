@@ -17,14 +17,13 @@ public class Arrow : ParapolBullet
         lineRenderer.positionCount = Trajectory_num;
         CalTrajectory();
         CalBulletSpeedAndAngle();
-        moveBulletCoroutine = StartCoroutine(MoveParabolBullet());
+        moveBulletCoroutine = StartCoroutine(MoveProcess());
     }
 
     void Update()
     {
         CalBulletSpeedAndAngle();
         CalTrajectory();
-
         OnReachTargetLastPos();
     }
 
@@ -38,9 +37,22 @@ public class Arrow : ParapolBullet
         }
     }
 
+    public override IEnumerator PlaySoundAndDestroyWhenHit()
+    {
+        yield return AudioManager.Instance.PlaySoundAndWait(audioSource, soundEffectSO.arrowSound);
+        Destroy(gameObject);
+    }
+
+    // Animation Event
+    public void PlaySoundWhenHitGround()
+    {
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.arrowSound);
+    }
+
     // Animation Event
     public void OnDestroy()
     {
+        Debug.Log("CheckDestroy");
         Destroy(gameObject);
     }
 

@@ -4844,8 +4844,8 @@ GameObject:
   - component: {fileID: 6395925440863771318}
   - component: {fileID: 5383353881194298726}
   - component: {fileID: 6323101789662472790}
-  - component: {fileID: -3265042917940404320}
   - component: {fileID: -3353463256377067441}
+  - component: {fileID: -3265042917940404320}
   m_Layer: 0
   m_Name: Bullet_Arrow Fire
   m_TagString: Untagged
@@ -5126,29 +5126,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.36464494, y: 2.135172}
   m_EdgeRadius: 0
---- !u!114 &-3265042917940404320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148968284486878133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100a9db01aced7a4495af5bbc3c7c13a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 17
-  damage: 4
-  target: {fileID: 0}
-  targetLastPos: {x: 0, y: 0}
-  audioSource: {fileID: 0}
-  bulletSound: {fileID: 8300000, guid: 233cbcc3cc3bcf340880fadf1a533b95, type: 3}
-  instantiatePoint: {x: 0, y: 0}
-  Trajectory_num: 50
-  lineRenderer: {fileID: 4288819782062168937}
-  trajectoryPoints: []
-  animator: {fileID: 0}
 --- !u!82 &-3353463256377067441
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5245,3 +5222,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3265042917940404320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148968284486878133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100a9db01aced7a4495af5bbc3c7c13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 17
+  damage: 4
+  target: {fileID: 0}
+  targetLastPos: {x: 0, y: 0}
+  spriteRenderer: {fileID: 0}
+  audioSource: {fileID: 0}
+  soundEffectSO: {fileID: 11400000, guid: 58f3b842f8497a046a2a1acaa17e7bc7, type: 2}
+  lineRenderer: {fileID: 4288819782062168937}
+  instantiatePoint: {x: 0, y: 0}
+  Trajectory_num: 50
+  animator: {fileID: 0}

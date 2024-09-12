@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    
     SpawnEnemyManager spawnEnemyManager;
     [SerializeField] CautionSlider cautionSlider;
-    public int currentWave;
-    [SerializeField] float timeBetweenEnemy;
     [SerializeField] List<EnemyEntry> enemyEntries = new List<EnemyEntry>();
-    
+    [SerializeField] float timeBetweenEnemy;
+    public int currentWave;
     public bool cautionButtonClicked = false;
-    Coroutine StartInstantiateCoroutine;
 
     void Awake()
     {
@@ -79,6 +78,7 @@ public class SpawnEnemy : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 elapsed += 0.1f;
             }
+            spawnEnemyManager.PlaySound();
         }
     }
 

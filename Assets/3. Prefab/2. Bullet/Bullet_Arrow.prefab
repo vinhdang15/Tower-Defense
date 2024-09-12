@@ -313,11 +313,10 @@ MonoBehaviour:
   targetLastPos: {x: 0, y: 0}
   spriteRenderer: {fileID: 0}
   audioSource: {fileID: 0}
-  bulletSound: {fileID: 8300000, guid: 233cbcc3cc3bcf340880fadf1a533b95, type: 3}
+  soundEffectSO: {fileID: 11400000, guid: 58f3b842f8497a046a2a1acaa17e7bc7, type: 2}
+  lineRenderer: {fileID: 4288819782062168937}
   instantiatePoint: {x: 0, y: 0}
   Trajectory_num: 50
-  lineRenderer: {fileID: 4288819782062168937}
-  trajectoryPoints: []
   animator: {fileID: 0}
 --- !u!82 &-1423929242736068478
 AudioSource:
@@ -331,7 +330,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

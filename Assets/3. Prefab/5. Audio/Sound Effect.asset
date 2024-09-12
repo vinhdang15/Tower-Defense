@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adff3045076582540856fd8c8aa76d8f, type: 3}
+  m_Name: Sound Effect
+  m_EditorClassIdentifier: 
+  arrowSound: {fileID: 8300000, guid: 233cbcc3cc3bcf340880fadf1a533b95, type: 3}
+  bomExplosionSound: {fileID: 8300000, guid: 29a96487c2aa4e54d8a46f452f9d467a, type: 3}
+  bomWhistleSound: {fileID: 8300000, guid: af20bfdbccc6870488621ca16561e3f8, type: 3}
+  comingWaveSound: {fileID: 8300000, guid: 309e0330115c6464f82280220f0ce766, type: 3}
+  Sword:
+  - {fileID: 8300000, guid: 8df21b80b8f361f49bbec0a02c6734eb, type: 3}
+  - {fileID: 8300000, guid: 4daf83c0b76f4ec4d8f68a09673778bf, type: 3}
+  - {fileID: 8300000, guid: c9d8df6acccdc6a4f9b9c927d6944961, type: 3}
+  Theme:
+  - {fileID: 8300000, guid: add5d9965cf5ecc46b53c7f7ee52c10d, type: 3}

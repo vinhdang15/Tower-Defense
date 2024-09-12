@@ -10,39 +10,23 @@ public class Bullet : MonoBehaviour
     public float damage = 1f;
     public Transform target;
     [HideInInspector] public Vector2 targetLastPos;
-
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
     [HideInInspector] public AudioSource audioSource;
-    public AudioClip bulletSound;
+    public SoundEffectSO soundEffectSO;
     
     public void SetTarget(Transform target)
     {
         this.target = target;
     }
 
-    public virtual IEnumerator Move()
+    public virtual IEnumerator MoveProcess()
     {
         while (true)
         {
             GetTargetLastPos();
-            // if (target != null)
-            // {
-            //     MoveProcess(target.position);
-            // }
-            // else 
-            // {
-            //     MoveProcess(targetLastPos);
-            //     OnReachTargetLastPos();
-            // }
             MoveTowardProcess(targetLastPos);
             yield return null;
-
-            // magic bullet still deal damege after hitting enemy, so can use this code
-            // GetTargetLastPos();
-            // MoveProcess(targetLastPos);
-            // OnReachTargetLastPos();
-            // yield return null;
         }   
     }
     
@@ -69,19 +53,29 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            StartCoroutine(HitTarget());
+           HitTarget();
         }
     }
 
-    public virtual IEnumerator HitTarget()
+    // public virtual IEnumerator HitTarget()
+    // {
+    //     if (target != null)
+    //     {
+    //         target.GetComponent<Unit>().TakeDamage(damage);
+    //         PlayAudio();
+    //         spriteRenderer.enabled = false;
+    //         yield return new WaitForSeconds(bulletSound.length);
+    //         Destroy(gameObject);
+    //     }
+    // }
+    
+    public virtual void HitTarget()
     {
         if (target != null)
         {
+            StartCoroutine(PlaySoundAndDestroyWhenHit());
             target.GetComponent<Unit>().TakeDamage(damage);
-            PlayAudio();
             spriteRenderer.enabled = false;
-            yield return new WaitForSeconds(bulletSound.length);
-            Destroy(gameObject);
         }
     }
 
@@ -90,10 +84,9 @@ public class Bullet : MonoBehaviour
         if (IsReachTargetLastPos()) Destroy(gameObject);
     }
 
-    void PlayAudio()
+    public virtual IEnumerator PlaySoundAndDestroyWhenHit()
     {
-        audioSource.PlayOneShot(bulletSound);
-        audioSource.pitch = Random.Range(0.95f,1.05f);
+        yield return null;
     }
 }
     

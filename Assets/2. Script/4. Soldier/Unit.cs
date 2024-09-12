@@ -22,6 +22,10 @@ public class Unit : MonoBehaviour
     // ======= ANIMATION =======
     public Animator animator;
 
+    // ======= SOUND =======
+    [HideInInspector] public AudioSource audioSource;
+    public SoundEffectSO soundEffectSO;
+    
     public void SetupHpCurrent()
     {
         HpCurrent = HpMax;

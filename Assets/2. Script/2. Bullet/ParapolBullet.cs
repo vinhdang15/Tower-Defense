@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ParapolBullet : Bullet
 {
-    public Vector2 instantiatePoint;
+    public LineRenderer lineRenderer;
+    [HideInInspector] public Vector2 instantiatePoint;
+    [HideInInspector] public int Trajectory_num = 50;
     Vector2 bulletLastPosition;
-    public int Trajectory_num = 50;
     float initialAngleDeg;
     float initialAngleRad;
     float config = 0.1f;
     float V;
     float gravity = 9.8f;
-    public LineRenderer lineRenderer;
 
-    [SerializeField] List<Vector2> trajectoryPoints = new List<Vector2>();
+    List<Vector2> trajectoryPoints = new List<Vector2>();
     float speedY = 0f;
 
     public virtual void CalTrajectory()
@@ -122,7 +122,7 @@ public class ParapolBullet : Bullet
         }
     }
 
-    public virtual IEnumerator MoveParabolBullet()
+    public override IEnumerator MoveProcess()
     {        
         for (int i = 0; i < trajectoryPoints.Count; i++)
         {  

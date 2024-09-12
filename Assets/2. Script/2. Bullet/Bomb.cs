@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Bomb : ParapolBullet
 {
     [SerializeField] Animator animator;
     [SerializeField] float boomRange = 2f;
-    CircleCollider2D circleCollider2D;
     [SerializeField] List<Unit> enemiesInRange = new List<Unit>();
+    CircleCollider2D circleCollider2D;
     Coroutine moveBulletCoroutine;
     void Start()
     {
@@ -20,7 +21,10 @@ public class Bomb : ParapolBullet
         lineRenderer.positionCount = Trajectory_num;
         CalTrajectory();
         CalBulletSpeedAndAngle();
-        moveBulletCoroutine = StartCoroutine(MoveParabolBullet());
+        moveBulletCoroutine = StartCoroutine(MoveProcess());
+
+        audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.bomWhistleSound);
     }
 
     void Update()
@@ -55,18 +59,25 @@ public class Bomb : ParapolBullet
         if (IsReachTargetLastPos())
         {
             StopCoroutine(moveBulletCoroutine);
-            animator.SetTrigger("IsHitEnemy");
+            animator.SetTrigger("IsHitGround");
         }
     }
 
     // Animation Event
     public void TakeDamageInRange()
-    {
+    {   
         if(enemiesInRange.Count == 0) return; 
-        foreach(Unit enemy in enemiesInRange)
+        List<Unit> enemies = new List<Unit>(enemiesInRange);
+        foreach(Unit enemy in enemies)
         {   
             if(enemy != null) enemy.TakeDamage(damage);
         }
+    }
+
+    // Animation Event
+    public void PlayExplosionSound()
+    {
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.bomExplosionSound);
     }
 
     // Animation Event

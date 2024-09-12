@@ -8,18 +8,25 @@ public class Magic : Bullet
     [SerializeField] private float dealDamageTimeAmount = 0.5f;
     void Start()
     {
-        StartCoroutine(Move());
+        audioSource = GetComponent<AudioSource>();
+        StartCoroutine(MoveProcess());
     }
 
-    public override IEnumerator HitTarget()
+    public override void HitTarget()
     {
         if (target != null)
         {   
+            StartCoroutine(PlaySoundAndDestroyWhenHit());
             StartTakeDamageCoroutine();
             transform.GetComponent<SpriteRenderer>().enabled = false;
         }
+    }
+
+    public override IEnumerator PlaySoundAndDestroyWhenHit()
+    {
         yield return null;
-    } 
+        Destroy(gameObject);
+    }
 
     IEnumerator TakeDamage()
     {

@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class SpawnEnemyManager : MonoBehaviour
 {
+    [Header("Wave Status")]
+    public float timeForNextWave = 8f;
     public int currentWave;
     public bool beginNextWave;
     public bool beginSpawnCoroutine;
-    public float timeForNextWave = 8f;
     public List<CautionSlider> cautionSliders = new();
     [SerializeField] List<SpawnEnemy> spawnEnemies = new();
+
+    [Header("Audio")]
+    [SerializeField] SoundEffectSO soundEffectSO;
+    AudioSource audioSource;
 
     void Start()
     {
         AddPath();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void AddPath()
@@ -48,6 +54,7 @@ public class SpawnEnemyManager : MonoBehaviour
     // button event
     public void GetNextWave()
     {
+        PlaySound();
         // Check if caution button first hit, then begin SpawnCoroutine at all path (each path is a spawnEnemy instance)
         foreach(SpawnEnemy spawnEnemy in spawnEnemies)
         {
@@ -67,8 +74,11 @@ public class SpawnEnemyManager : MonoBehaviour
             caution.StopCaution();
             caution.isStartFirstWave = true;
         }
-        
-       
+    }
+
+    public void PlaySound()
+    {
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.comingWaveSound);
     }
 
 }

@@ -28,6 +28,7 @@ public class Soldier : Unit
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         currentLocalScale = transform.localScale;
         SetupHpCurrent();
     }
@@ -139,6 +140,7 @@ public class Soldier : Unit
     public void AttackEnemy()
     {
         if(targetEnemy == null) return;
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.GetRandomSwordSound());
         targetEnemy.GetComponent<WalkingEnemy>().TakeDamage(damage);
     }
 
