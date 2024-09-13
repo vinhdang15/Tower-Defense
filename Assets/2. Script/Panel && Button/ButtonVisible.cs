@@ -11,10 +11,7 @@ public class ButtonVisible : PracticalUtilities
     [SerializeField] List<TextMeshProUGUI> instantiateCostTexts = new List<TextMeshProUGUI>();
     [SerializeField] TextMeshProUGUI upgradeCostTexts;
     [SerializeField] TextMeshProUGUI goldRefundTexts;
-
     PanelController panelController;
-
-
 
     // Start is called before the first frame update
     void Start()

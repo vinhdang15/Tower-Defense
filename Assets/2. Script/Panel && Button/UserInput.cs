@@ -28,15 +28,6 @@ public class UserInput : MonoBehaviour
             worldPos = Camera.main.ScreenToWorldPoint(mousePos);
             panelController.worldPos = worldPos;
                      
-            // if(panelController.currentBarrack == null)
-            // {
-            //     hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, LayerMask.GetMask("BuildingSpot", "TowerBody", "BarrackBody", "Button"));
-            // }
-            // else if(panelController.currentBarrack != null)
-            // {
-            //     hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, LayerMask.GetMask("BarrackRange"));
-            //     Debug.Log("check");
-            // }
             if(panelController.isShowPanel == false)
             {
                 hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, LayerMask.GetMask("BuildingSpot", "TowerBody", "BarrackBody", "BarrackRange", "Button"));

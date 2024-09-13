@@ -42,8 +42,13 @@ public class PanelController : PracticalUtilities
     public delegate void TowerAction();
     public delegate void TryTowerAction();
 
+    // ======= AUDIO =======
+    [SerializeField] SoundEffectSO soundEffectSO;
+    AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         SetUpIndicatorAndPanel();
     }
 
@@ -78,10 +83,7 @@ public class PanelController : PracticalUtilities
             HandleBarrackRangeHit(hit);
         }
 
-        if (hit.collider.gameObject.layer != LayerMask.NameToLayer("BarrackBody"))
-        {
-            //currentBarrack = null;
-        }
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.clickSound);
     }
 
     public void HandleRaycastHitNull()
@@ -196,6 +198,8 @@ public class PanelController : PracticalUtilities
         {
             GameObject tower = Instantiate(towerList[index], position, Quaternion.identity, towerHolder);
             tower.transform.GetComponentInChildren<TowerBase>().buildingSpotList.Add(currenBuildingSpot.gameObject);  
+            AudioManager.Instance.PlaySound(audioSource, soundEffectSO.BuildSound);
+            
             HideCurrentPanel();
             HideButtonTick(currentButton);
             HideBuildingSpot();
@@ -273,6 +277,7 @@ public class PanelController : PracticalUtilities
         
         GameController.AddGold(currentTowerBaseScript.GetGoldRefund());
         Destroy(currentTowerBaseScript.gameObject);
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.SoldSound);
     }
 
     void TrySellTower()

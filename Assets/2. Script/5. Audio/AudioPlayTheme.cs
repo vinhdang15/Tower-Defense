@@ -10,6 +10,7 @@ public class AudioPlayTheme : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
         AudioManager.Instance.PlaySound(audioSource, soundEffectSO.GetThemeSound(0));
     }
 }

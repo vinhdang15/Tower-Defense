@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] UIController uiController;
     [SerializeField] GameObject gameOverPanel;
-    public static int totalGold = 200;
+    public static int totalGold = 100;
     public static int lives = 10;
     
     void Start()

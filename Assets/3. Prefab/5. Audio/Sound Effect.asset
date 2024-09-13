@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adff3045076582540856fd8c8aa76d8f, type: 3}
   m_Name: Sound Effect
   m_EditorClassIdentifier: 
+  comingWaveSound: {fileID: 8300000, guid: 309e0330115c6464f82280220f0ce766, type: 3}
+  Theme:
+  - {fileID: 8300000, guid: add5d9965cf5ecc46b53c7f7ee52c10d, type: 3}
+  clickSound: {fileID: 8300000, guid: 4e3211b6f8996ea4c98e0f382d13c801, type: 3}
+  BuildSound: {fileID: 8300000, guid: 900897de787160348b332fb105cc6ffb, type: 3}
+  SoldSound: {fileID: 8300000, guid: 32875ec98b538f948a87d062f95d3356, type: 3}
   arrowSound: {fileID: 8300000, guid: 233cbcc3cc3bcf340880fadf1a533b95, type: 3}
   bomExplosionSound: {fileID: 8300000, guid: 29a96487c2aa4e54d8a46f452f9d467a, type: 3}
   bomWhistleSound: {fileID: 8300000, guid: af20bfdbccc6870488621ca16561e3f8, type: 3}
-  comingWaveSound: {fileID: 8300000, guid: 309e0330115c6464f82280220f0ce766, type: 3}
+  MagicBallHitSound: {fileID: 8300000, guid: 1a5d1f3b7bcebfe4094c02b54ce4af73, type: 3}
+  MagicBallWhistleSound: {fileID: 8300000, guid: c84b0297dec364b4ebfef1b9c55e5cdf, type: 3}
   Sword:
   - {fileID: 8300000, guid: 8df21b80b8f361f49bbec0a02c6734eb, type: 3}
   - {fileID: 8300000, guid: 4daf83c0b76f4ec4d8f68a09673778bf, type: 3}
   - {fileID: 8300000, guid: c9d8df6acccdc6a4f9b9c927d6944961, type: 3}
-  Theme:
-  - {fileID: 8300000, guid: add5d9965cf5ecc46b53c7f7ee52c10d, type: 3}

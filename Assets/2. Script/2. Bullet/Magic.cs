@@ -10,23 +10,25 @@ public class Magic : Bullet
     {
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(MoveProcess());
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.MagicBallWhistleSound);
     }
 
     public override void HitTarget()
     {
         if (target != null)
         {   
+            AudioManager.Instance.PlaySound(audioSource, soundEffectSO.MagicBallHitSound);
             StartCoroutine(PlaySoundAndDestroyWhenHit());
             StartTakeDamageCoroutine();
             transform.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
-    public override IEnumerator PlaySoundAndDestroyWhenHit()
-    {
-        yield return null;
-        Destroy(gameObject);
-    }
+    // public override IEnumerator PlaySoundAndDestroyWhenHit()
+    // {
+    //     yield return AudioManager.Instance.PlaySoundAndWait(audioSource, soundEffectSO.MagicBallWhistleSound);
+    //     Destroy(gameObject);
+    // }
 
     IEnumerator TakeDamage()
     {
