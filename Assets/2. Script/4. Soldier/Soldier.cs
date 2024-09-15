@@ -80,6 +80,7 @@ public class Soldier : Unit
         if(targetEnemy != null && hadTarget == true) return;
         foreach( var enemy in enemyInRange)
         {
+            if(enemy == null) return;
             if (enemy.GetComponent<WalkingEnemy>().soldier == null)
             {
                 targetEnemy = enemy;

@@ -52,7 +52,6 @@ public class Arrow : ParapolBullet
     // Animation Event
     public void OnDestroy()
     {
-        Debug.Log("CheckDestroy");
         Destroy(gameObject);
     }
 

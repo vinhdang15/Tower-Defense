@@ -18,7 +18,7 @@ public class Barrack : TowerBase
         currentRange = detectionRanges[currentLevel];
         barrackRange.GetComponent<CircleCollider2D>().radius = currentRange;
         currentSpawnPrefab = soldierPrefabs[currentLevel];
-        GameController.SpendGold(upgradeCosts[0]);
+        GameController.Instance.SpendGold(upgradeCosts[0]);
         goldRefund += upgradeCosts[0];
     }
 

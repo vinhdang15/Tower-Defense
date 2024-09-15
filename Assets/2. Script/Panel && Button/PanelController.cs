@@ -275,9 +275,9 @@ public class PanelController : PracticalUtilities
         HideCurrentPanel();
         ShowBuildingSpot();
         
-        GameController.AddGold(currentTowerBaseScript.GetGoldRefund());
+        GameController.Instance.AddGold(currentTowerBaseScript.GetGoldRefund());
         Destroy(currentTowerBaseScript.gameObject);
-        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.SoldSound);
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.AddGoldSound);
     }
 
     void TrySellTower()

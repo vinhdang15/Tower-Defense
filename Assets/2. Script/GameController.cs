@@ -5,54 +5,71 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance;
     [SerializeField] UIController uiController;
     [SerializeField] GameObject gameOverPanel;
-    public static int totalGold = 100;
-    public static int lives = 10;
+    [SerializeField] int totalWave;
+    [SerializeField] int currentWave;
+    [SerializeField] int initialGold = 100;
+    [SerializeField] int initialLive = 10;
+    [HideInInspector] public int totalGold;
+    [HideInInspector] public int lives;
     
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
-        // totalGold = 100;
-        // lives = 10;
+        totalGold = initialGold;
+        lives = initialLive;
         uiController.UpdateGoldText(totalGold);
         uiController.UpdateLivesText(lives);
         gameOverPanel.SetActive(false);
     }
 
-    public static void AddGold(int gold)
+    public void AddGold(int gold)
     {
         totalGold += gold;
-        Instance.uiController.UpdateGoldText(totalGold);
+        uiController.UpdateGoldText(totalGold);
     }
 
-    public static void SpendGold(int gold)
+    public void SpendGold(int gold)
     {
         totalGold -= gold;
-        Instance.uiController.UpdateGoldText(totalGold);
+        uiController.UpdateGoldText(totalGold);
     }
 
-    public static void UpdateLives(int i)
+    public void UpdateLives(int i)
     {
         lives += i;
-        Instance.uiController.UpdateLivesText(lives);
-        Instance.ShowGameOverPanel();
+        uiController.UpdateLivesText(lives);
+        ShowGameOverPanel();
+    }
+
+    public void UpdateTotalWave(int total)
+    {
+        totalWave = total;
+        uiController.UpdateTotalWaveText(totalWave);
+    }
+
+    public void UpdateCurrentWave(int current)
+    {
+        currentWave = current;
+        uiController.UpdateCurrentWaveText(currentWave);
     }
 
     void ShowGameOverPanel()
     {
         if(lives == 0) gameOverPanel.SetActive(true);
-    }
-
-    private static GameController _instance;
-    public static GameController Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameController>();
-            }
-            return _instance;
-        }
     }
 }

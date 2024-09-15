@@ -12,6 +12,9 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] float timeBetweenEnemy;
     public int currentWave;
     public bool cautionButtonClicked = false;
+    public float elapsed;
+
+    [SerializeField] SoundEffectSO soundEffectSO;
 
     void Awake()
     {
@@ -26,7 +29,7 @@ public class SpawnEnemy : MonoBehaviour
         GameObject canvas = GameObject.Find("Canvas - WorldSpace");
         cautionSlider.transform.SetParent(canvas.transform, true);
 
-        ShowCautionAtFirstWave();
+        CheckToShowCautionAtFirstWave();
     }
 
     public void StartSpawnCoroutine()
@@ -35,7 +38,9 @@ public class SpawnEnemy : MonoBehaviour
     }
     
     IEnumerator InstantiateEnemyWave()
-    {   
+    {
+        currentWave = 1;
+        GameController.Instance.UpdateCurrentWave(currentWave);
         for(int y = 0; y < enemyEntries.Count; y++)
         {
             for(int i = 0; i < enemyEntries[y].numberEnemyInWave; i++)
@@ -67,7 +72,7 @@ public class SpawnEnemy : MonoBehaviour
             
 
             // check if GetNextWave() is click or not
-            float elapsed = 0f;
+            elapsed = 0f;
             while(elapsed < cautionSlider.timeLimit)
             {
                 if(cautionButtonClicked)
@@ -78,17 +83,23 @@ public class SpawnEnemy : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 elapsed += 0.1f;
             }
-            spawnEnemyManager.PlaySound();
+            
+            if(currentWave <= enemyEntries.Count)
+            {
+                GameController.Instance.UpdateCurrentWave(currentWave);
+                spawnEnemyManager.PlaySound();
+            }
         }
     }
 
-    void ShowCautionAtFirstWave()
+    void CheckToShowCautionAtFirstWave()
     {
         if(enemyEntries[0].numberEnemyInWave == 0)
         {
             cautionSlider.StopCaution();
         }
     }
+    
     float SetTimeBetweenEnemy()
     {
         return Random.Range(timeBetweenEnemy * 0.5f, timeBetweenEnemy * 2f);
@@ -97,6 +108,11 @@ public class SpawnEnemy : MonoBehaviour
     {
         GameObject enemyInstantiate = Instantiate(enemy, transform);
         enemyInstantiate.GetComponent<PathFinder>().SetPosInPathWave(index % 3);
+    }
+
+    public int GetTotalWave()
+    {
+        return enemyEntries.Count;
     }
 }
 

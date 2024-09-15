@@ -131,7 +131,7 @@ public class TowerBase : MonoBehaviour
         if(CanUpgrade())
         {
             int goldUpgrade = GetGoldUpgrade();
-            GameController.SpendGold(goldUpgrade);
+            GameController.Instance.SpendGold(goldUpgrade);
             goldRefund += goldUpgrade;
 
             Upgrade(currentLevel + 1);
@@ -141,13 +141,13 @@ public class TowerBase : MonoBehaviour
 
     public virtual bool CanInstantiate()
     {
-        if(GameController.totalGold >= upgradeCosts[0]) return true;
+        if(GameController.Instance.totalGold >= upgradeCosts[0]) return true;
         else return false;
     }
 
     public virtual bool CanUpgrade()
     {
-        if(GameController.totalGold >= GetGoldUpgrade()) return true;
+        if(GameController.Instance.totalGold >= GetGoldUpgrade()) return true;
         else return false;
     }
     #endregion

@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public Vector2 targetLastPos;
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
+    // ======= SOUND =======
     [HideInInspector] public AudioSource audioSource;
     public SoundEffectSO soundEffectSO;
     

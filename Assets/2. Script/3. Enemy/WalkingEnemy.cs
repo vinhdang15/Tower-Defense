@@ -33,7 +33,7 @@ public class WalkingEnemy : Enemy
 
     public override void Die()
     {
-        GameController.AddGold(enemyGold);
+        GameController.Instance.AddGold(enemyGold);
         Destroy(gameObject);
     }
 

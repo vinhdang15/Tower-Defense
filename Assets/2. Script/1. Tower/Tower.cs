@@ -12,7 +12,7 @@ public class Tower : TowerBase
         currentLevel = 0;
         currentRange = detectionRanges[currentLevel];
         currentSpawnPrefab = bulletPrefabs[currentLevel];
-        GameController.SpendGold(upgradeCosts[0]);
+        GameController.Instance.SpendGold(upgradeCosts[0]);
         goldRefund += upgradeCosts[0];
     }
 

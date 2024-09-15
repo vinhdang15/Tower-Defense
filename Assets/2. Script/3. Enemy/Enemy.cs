@@ -18,7 +18,7 @@ public class Enemy : Unit
     {
         if(other.CompareTag("EndPoint"))
         {
-            GameController.UpdateLives(-1);
+            GameController.Instance.UpdateLives(-1);
         }
     }
 }

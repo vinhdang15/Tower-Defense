@@ -14,7 +14,7 @@ public class SoundEffectSO : ScriptableObject
     [Header("Click Event")]
     public AudioClip clickSound;
     public AudioClip BuildSound;
-    public AudioClip SoldSound;
+    public AudioClip AddGoldSound;
 
     [Header("Weapons")]
     public AudioClip arrowSound;

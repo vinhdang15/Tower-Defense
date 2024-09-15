@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnEnemyManager : MonoBehaviour
 {
@@ -19,7 +20,9 @@ public class SpawnEnemyManager : MonoBehaviour
     void Start()
     {
         AddPath();
+        UpdateTotalWave();
         audioSource = GetComponent<AudioSource>();
+        GameController.Instance.UpdateCurrentWave(0);
     }
 
     void AddPath()
@@ -36,6 +39,12 @@ public class SpawnEnemyManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void UpdateTotalWave()
+    {
+        int totalWave = spawnEnemies[0].GetTotalWave();
+        GameController.Instance.UpdateTotalWave(totalWave);
     }
     public void CheckCurrentwaveIndex()
     {   
@@ -55,24 +64,24 @@ public class SpawnEnemyManager : MonoBehaviour
     public void GetNextWave()
     {
         PlaySound();
-        // Check if caution button first hit, then begin SpawnCoroutine at all path (each path is a spawnEnemy instance)
         foreach(SpawnEnemy spawnEnemy in spawnEnemies)
         {
             spawnEnemy.cautionButtonClicked = true;
+            // Check if caution button first hit, then begin SpawnCoroutine at all path (each path is a spawnEnemy instance)
             if(beginSpawnCoroutine == false)
             {
                 spawnEnemy.StartSpawnCoroutine();
                 // reset spawnEnemy.cautionButtonClicked if this if the caution button was first hit (mean begin Spawn Coroutine)
                 spawnEnemy.cautionButtonClicked = false;
             }
-            //Debug.Log(spawnEnemy.cautionButtonClicked);
         }
         beginSpawnCoroutine = true;
 
         foreach(CautionSlider caution in cautionSliders)
         {
-            caution.StopCaution();
             caution.isStartFirstWave = true;
+            caution.AddGold();
+            caution.StopCaution();   
         }
     }
 

@@ -6,16 +6,24 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI goldText;
-    [SerializeField] TextMeshProUGUI healthText;
-
-    // [SerializeField] static TextMeshProUGUI goldText;
-    // [SerializeField] static TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField] TextMeshProUGUI totalWaveText;
+    [SerializeField] TextMeshProUGUI currentWaveText;
 
     void Awake()
     {
-        // goldText = goldTextInstance;
-        // healthText = healthTextInstance;
+
     }
+    public void UpdateTotalWaveText(int total)
+    {
+        totalWaveText.text = total.ToString();
+    }
+
+    public void UpdateCurrentWaveText(int current)
+    {
+        currentWaveText.text = current.ToString() + " OF";
+    }
+
     public void UpdateGoldText(int gold)
     {
         goldText.text = gold.ToString();
@@ -23,6 +31,6 @@ public class UIController : MonoBehaviour
 
     public void UpdateLivesText(int health)
     {
-        healthText.text = health.ToString();
+        livesText.text = health.ToString();
     }
 }
