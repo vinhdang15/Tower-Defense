@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] int initialLive = 10;
     [HideInInspector] public int totalGold;
     [HideInInspector] public int lives;
+    bool gameOver;
     
     void Awake()
     {
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour
         uiController.UpdateGoldText(totalGold);
         uiController.UpdateLivesText(lives);
         gameOverPanel.SetActive(false);
+        gameOver = false;
     }
 
     public void AddGold(int gold)
@@ -53,7 +55,11 @@ public class GameController : MonoBehaviour
     {
         lives += i;
         uiController.UpdateLivesText(lives);
-        ShowGameOverPanel();
+        if(lives == 0)
+        {
+            gameOver = true;
+            ShowGameOverPanel();
+        }
     }
 
     public void UpdateTotalWave(int total)
@@ -70,6 +76,10 @@ public class GameController : MonoBehaviour
 
     void ShowGameOverPanel()
     {
-        if(lives == 0) gameOverPanel.SetActive(true);
+        gameOverPanel.SetActive(true);
+    }
+    public bool GetGameOverStatus()
+    {
+        return gameOver;
     }
 }

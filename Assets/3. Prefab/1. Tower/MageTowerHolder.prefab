@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1239411607803087084
+--- !u!1 &2518775412328006831
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,30 +8,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5226077520245723931}
+  - component: {fileID: 3865541123546138695}
   m_Layer: 0
-  m_Name: SpawnPoint
+  m_Name: MageTowerHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5226077520245723931
+--- !u!4 &3865541123546138695
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239411607803087084}
+  m_GameObject: {fileID: 2518775412328006831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.057, y: 1.34, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8541591289860810591}
+  m_Children:
+  - {fileID: 6644524536291528685}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6600204259097494647
+--- !u!1 &6643825722324845214
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,43 +40,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8541591289860810591}
-  - component: {fileID: 5091662768170264977}
-  - component: {fileID: 3228851082270549930}
-  - component: {fileID: 3475401562821164729}
-  - component: {fileID: 479609743372189580}
-  - component: {fileID: 7271356481652716528}
+  - component: {fileID: 6644524536291528685}
+  - component: {fileID: 5699036507435803276}
+  - component: {fileID: 6329205444268252833}
+  - component: {fileID: 2283187821931722625}
+  - component: {fileID: 5820519019250620762}
+  - component: {fileID: 2813349807486501595}
   m_Layer: 7
-  m_Name: ArrowTower
+  m_Name: MageTower
   m_TagString: MagicTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8541591289860810591
+--- !u!4 &6644524536291528685
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600204259097494647}
+  m_GameObject: {fileID: 6643825722324845214}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7543841542142259833}
-  - {fileID: 5226077520245723931}
-  m_Father: {fileID: 2510204234876806056}
+  - {fileID: 3070570264833285610}
+  - {fileID: 7900178569398308145}
+  m_Father: {fileID: 3865541123546138695}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5091662768170264977
+--- !u!212 &5699036507435803276
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600204259097494647}
+  m_GameObject: {fileID: 6643825722324845214}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -110,25 +111,25 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b54d64e95991d934eadbc1ad3ea82dd5, type: 3}
+  m_Sprite: {fileID: -1424504573, guid: 52973009b60930d4ea3571863d31a41c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.9692308, y: 3.9384615}
+  m_Size: {x: 1.8285714, y: 3.6571429}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &3228851082270549930
+--- !u!50 &6329205444268252833
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600204259097494647}
+  m_GameObject: {fileID: 6643825722324845214}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -148,13 +149,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &3475401562821164729
+--- !u!58 &2283187821931722625
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600204259097494647}
+  m_GameObject: {fileID: 6643825722324845214}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -183,17 +184,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!95 &479609743372189580
+--- !u!95 &5820519019250620762
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600204259097494647}
+  m_GameObject: {fileID: 6643825722324845214}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4b37c7ea9e3ac35439c496030a9a622a, type: 2}
+  m_Controller: {fileID: 9100000, guid: ba877592f5246f44f822087bfbe805e9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -204,28 +205,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7271356481652716528
+--- !u!114 &2813349807486501595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600204259097494647}
+  m_GameObject: {fileID: 6643825722324845214}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d1948b55d59a914b9abe45c174b08a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 0.7
-  SpawnPoint: {fileID: 5226077520245723931}
+  currentSpawnRate: 0
+  currentDamage: 0
+  SpawnPoint: {fileID: 7900178569398308145}
   spawnHolder: {fileID: 0}
   enemiesInRange: []
   currentLevel: 0
-  upgradeCosts: 1e0000002d00000050000000
+  description:
+  - 'Mage Tower: Slows down enemies, deals damage multiple times.'
+  - Increase Damage.
+  - Increase rate of fire.
+  spawnObjectPrefabs:
+  - {fileID: 6279879979122603702, guid: c58c9b8a43fa8264da514d1e8a1b9de0, type: 3}
+  - {fileID: 6279879979122603702, guid: fa211b273c758a648ba1a7698a43885b, type: 3}
+  - {fileID: 6279879979122603702, guid: fa211b273c758a648ba1a7698a43885b, type: 3}
+  upgradeCosts: 280000005a00000096000000
+  spawnRate:
+  - 2
+  - 2
+  - 1.5
   detectionRanges:
+  - 4
+  - 5
   - 6
-  - 7
-  - 8
   buildingSpotList: []
   goldRefund: 0
   TowerBodyRadius: 0.7
@@ -233,11 +247,7 @@ MonoBehaviour:
   currentSpawnPrefab: {fileID: 0}
   towerCollider: {fileID: 0}
   animator: {fileID: 0}
-  bulletPrefabs:
-  - {fileID: 8148968284486878133, guid: 510e41e1858abb24f8aefc2873f38288, type: 3}
-  - {fileID: 8148968284486878133, guid: dca009b2abb843941aec5fbf6e6d7417, type: 3}
-  - {fileID: 8148968284486878133, guid: dca009b2abb843941aec5fbf6e6d7417, type: 3}
---- !u!1 &8800767010444272645
+--- !u!1 &8860068022325067414
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,37 +255,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2510204234876806056}
+  - component: {fileID: 7900178569398308145}
   m_Layer: 0
-  m_Name: ArrowTowerHolder
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2510204234876806056
+--- !u!4 &7900178569398308145
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8800767010444272645}
+  m_GameObject: {fileID: 8860068022325067414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.057, y: 1.055, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8541591289860810591}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 6644524536291528685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6443699009790764018
+--- !u!1001 &1963954890219179105
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8541591289860810591}
+    m_TransformParent: {fileID: 6644524536291528685}
     m_Modifications:
     - target: {fileID: 3593175352528343435, guid: 86a6ddd51531bfe47ae0d9ca03a987e1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -326,8 +335,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86a6ddd51531bfe47ae0d9ca03a987e1, type: 3}
---- !u!4 &7543841542142259833 stripped
+--- !u!4 &3070570264833285610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3593175352528343435, guid: 86a6ddd51531bfe47ae0d9ca03a987e1, type: 3}
-  m_PrefabInstance: {fileID: 6443699009790764018}
+  m_PrefabInstance: {fileID: 1963954890219179105}
   m_PrefabAsset: {fileID: 0}

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Barrack : TowerBase
 {
     [Header("Tower Spec")]
-    [SerializeField] GameObject[] soldierPrefabs = new GameObject[3];
+    //[SerializeField] GameObject[] spawnObjectPrefabs = new GameObject[3];
     public Transform barrackRange;
     public Transform guardPointBase;
     [SerializeField] List<Soldier> soldierList = new();
@@ -15,9 +15,11 @@ public class Barrack : TowerBase
     void Awake()
     {
         currentLevel = 0;
+        currentDamage = GetCurrentDamage(currentLevel);
+        currentSpawnRate = spawnRate[currentLevel];
         currentRange = detectionRanges[currentLevel];
         barrackRange.GetComponent<CircleCollider2D>().radius = currentRange;
-        currentSpawnPrefab = soldierPrefabs[currentLevel];
+        currentSpawnPrefab = spawnObjectPrefabs[currentLevel];
         GameController.Instance.SpendGold(upgradeCosts[0]);
         goldRefund += upgradeCosts[0];
     }
@@ -77,9 +79,11 @@ public class Barrack : TowerBase
     public override void Upgrade(int level)
     {
         currentLevel = level;
+        currentDamage = GetCurrentDamage(currentLevel);
+        currentSpawnRate = spawnRate[level];
         currentRange = detectionRanges[level];
         barrackRange.GetComponent<CircleCollider2D>().radius = currentRange;
-        currentSpawnPrefab = soldierPrefabs[level];  
+        currentSpawnPrefab = spawnObjectPrefabs[level];  
     }
 }
 

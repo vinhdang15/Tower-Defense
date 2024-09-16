@@ -250,12 +250,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54f394f8c14dcb4386a43f5fbf8fab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 1
+  currentSpawnRate: 0
+  currentDamage: 0
   SpawnPoint: {fileID: 1492219084401433490}
   spawnHolder: {fileID: 0}
   enemiesInRange: []
   currentLevel: 0
+  description:
+  - Block and damage enemies, re sending new soldier after amount of time after each
+    die
+  - Improve soldier damage
+  - Improve soldier armor
+  spawnObjectPrefabs:
+  - {fileID: 6914185722129815933, guid: 87b058933e5adc9418c37859eeb5e3b8, type: 3}
+  - {fileID: 6914185722129815933, guid: 87b058933e5adc9418c37859eeb5e3b8, type: 3}
+  - {fileID: 6914185722129815933, guid: 87b058933e5adc9418c37859eeb5e3b8, type: 3}
   upgradeCosts: 320000004600000064000000
+  spawnRate:
+  - 10
+  - 8
+  - 6
   detectionRanges:
   - 3
   - 4
@@ -267,10 +281,6 @@ MonoBehaviour:
   currentSpawnPrefab: {fileID: 0}
   towerCollider: {fileID: 0}
   animator: {fileID: 0}
-  soldierPrefabs:
-  - {fileID: 6914185722129815933, guid: 87b058933e5adc9418c37859eeb5e3b8, type: 3}
-  - {fileID: 6914185722129815933, guid: 87b058933e5adc9418c37859eeb5e3b8, type: 3}
-  - {fileID: 6914185722129815933, guid: 87b058933e5adc9418c37859eeb5e3b8, type: 3}
   barrackRange: {fileID: 599948635419361252}
   guardPointBase: {fileID: 2018997734421307751}
   soldierList: []

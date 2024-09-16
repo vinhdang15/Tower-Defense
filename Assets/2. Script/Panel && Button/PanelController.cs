@@ -13,6 +13,7 @@ public class PanelController : PracticalUtilities
     public List<GameObject> towerList = new List<GameObject>();
     [SerializeField] Transform instantiatePanel;
     [SerializeField] Transform upgradePanel;
+    [SerializeField] StatusPanel statusPanel;
     [SerializeField] Transform nextLevelDetection;
     [SerializeField] Transform currentLevelDetection;
     [SerializeField] Transform towerHolder;
@@ -92,6 +93,7 @@ public class PanelController : PracticalUtilities
         HideCurrentLevleDetection();
         HideNextlevelDetection();
         HideCurrentPanel();
+        HideStatusPanel();
     }
 
     void HandleBuildingSpotHit(RaycastHit2D hit)
@@ -99,6 +101,7 @@ public class PanelController : PracticalUtilities
         ResetCurrentSelected();
         HideCurrentLevleDetection();
         HideNextlevelDetection();
+        HideStatusPanel();
         currenBuildingSpot = hit.collider.transform;
         position = hit.collider.transform.position;
 
@@ -118,6 +121,7 @@ public class PanelController : PracticalUtilities
         //ShowCurrentLevelDetection();
         HideNextlevelDetection();
         HideCurrentPanel();
+        ShowStatusPanel();
         
         currentPanelTrans = upgradePanel;
         currentPanelTrans.position = position;
@@ -127,6 +131,7 @@ public class PanelController : PracticalUtilities
     {
         HandleTowerBodyHit(hit);
         currentBarrack = hit.collider.transform.parent;
+        currentTowerBaseScript = hit.collider.transform.parent.GetComponent<TowerBase>();
     }
 
     void HandleBarrackRangeHit(RaycastHit2D hit)
@@ -146,6 +151,7 @@ public class PanelController : PracticalUtilities
         spriteBoundInX =  nextLevelDetection.GetComponent<SpriteRenderer>().bounds.size.x/2;
         HideCurrentLevleDetection();
         HideNextlevelDetection();
+        HideStatusPanel();
         HideObjectCoroutine(scaleUpCoroutine, instantiatePanel.transform, startScale);
         HideObjectCoroutine(scaleUpCoroutine, upgradePanel.transform, startScale);
     }
@@ -160,12 +166,13 @@ public class PanelController : PracticalUtilities
             towerAction();
             HideNextlevelDetection();
             HideCurrentLevleDetection();
+            HideStatusPanel();
         }
         else
         {
             if (currentButton != null) HideButtonTick(currentButton);
             ShowButtonTick(clickedButton);
-            tryTowerAction();
+            tryTowerAction();          
         }
         currentButton = clickedButton;
     }
@@ -194,7 +201,8 @@ public class PanelController : PracticalUtilities
 
     void InstantiateTower(int index)
     {
-        if(towerList[index].GetComponentInChildren<TowerBase>().CanInstantiate())
+        TowerBase towerBaseScript = towerList[index].GetComponentInChildren<TowerBase>();
+        if(towerBaseScript.CanInstantiate())
         {
             GameObject tower = Instantiate(towerList[index], position, Quaternion.identity, towerHolder);
             tower.transform.GetComponentInChildren<TowerBase>().buildingSpotList.Add(currenBuildingSpot.gameObject);  
@@ -210,21 +218,37 @@ public class PanelController : PracticalUtilities
     #region BUTTON EVENT - INSTANTIATE TOWER
     public void StartInstantiateArrowTower(Button clickedButton)
     {
+        TowerBase towerBaseScript = towerList[0].GetComponentInChildren<TowerBase>();
+        statusPanel.SetCurrentLevelStatusText(towerBaseScript);
+        ShowStatusPanel();
+
         OnButtonClick(clickedButton, InstantiateArrowTower, TryUpgradeTower);
     }
 
-    public void StartInstantiateMagicTower(Button clickedButton)
+    public void StartInstantiateMageTower(Button clickedButton)
     {
+        TowerBase towerBaseScript = towerList[1].GetComponentInChildren<TowerBase>();
+        statusPanel.SetCurrentLevelStatusText(towerBaseScript);
+        ShowStatusPanel();
+
         OnButtonClick(clickedButton, InstantiateMagicTower, TryUpgradeTower);
     }
 
     public void StartInstantiateCannonTower(Button clickedButton)
     {
-        OnButtonClick(clickedButton, InstantiateMagicTower);
+        TowerBase towerBaseScript = towerList[2].GetComponentInChildren<TowerBase>();
+        statusPanel.SetCurrentLevelStatusText(towerBaseScript);
+        ShowStatusPanel();
+
+        OnButtonClick(clickedButton, InstantiateCannonTower, TryUpgradeTower);
     }
 
     public void StartInstantiateBarrack(Button clickedButton)
     {
+        TowerBase towerBaseScript = towerList[3].GetComponentInChildren<TowerBase>();
+        statusPanel.SetCurrentLevelStatusText(towerBaseScript);
+        ShowStatusPanel();
+
         OnButtonClick(clickedButton, InstantiateBarrack, TryUpgradeTower);
     }
     #endregion
@@ -247,6 +271,9 @@ public class PanelController : PracticalUtilities
     #region BUTTON EVENT - UPGRADE TOWER
     public void StartUpgradeTower(Button clickedButton)
     {
+        statusPanel.SetNextLevelStatusText(currentTowerBaseScript);
+        ShowStatusPanel();
+        
         OnButtonClick(clickedButton, UpgradeTower, TryUpgradeTower);
     }
 
@@ -276,8 +303,9 @@ public class PanelController : PracticalUtilities
         ShowBuildingSpot();
         
         GameController.Instance.AddGold(currentTowerBaseScript.GetGoldRefund());
-        Destroy(currentTowerBaseScript.gameObject);
         AudioManager.Instance.PlaySound(audioSource, soundEffectSO.AddGoldSound);
+        Destroy(currentTowerBaseScript.gameObject);
+        
     }
 
     void TrySellTower()
@@ -314,6 +342,17 @@ public class PanelController : PracticalUtilities
         if(currentPanelTrans == null) return;
         HideObjectCoroutine(scaleUpCoroutine, currentPanelTrans, startScale);
         isShowPanel = false;
+    }
+
+    // ================== VISIBILITY STATUS PANEL
+     void ShowStatusPanel()
+    {
+        statusPanel.gameObject.SetActive(true);
+    }
+
+    void HideStatusPanel()
+    {
+        statusPanel.gameObject.SetActive(false);
     }
 
     // ================== VISIBILITY BUTTON TICK

@@ -34,7 +34,7 @@ public class Soldier : Unit
     }
     void Update()
     {
-        if(!isDead) Move();
+        if(!isDead && !GameController.Instance.GetGameOverStatus()) Move();
     }
 
     public override void Move()

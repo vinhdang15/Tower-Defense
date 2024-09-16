@@ -5,15 +5,20 @@ using UnityEngine;
 public class TowerBase : MonoBehaviour
 {
     [Header("Tower Properties")]
-    public float spawnRate = 1f;
+    public int currentDamage;
+    public float currentSpawnRate;
     public Transform SpawnPoint; 
     public Transform spawnHolder;
     public List<Transform> enemiesInRange = new List<Transform>();
 
     [Header("Tower Spec")]
     public int currentLevel;
-    public int[] upgradeCosts = new int[3];
+    public string[] description = new string[3];
+    public GameObject[] spawnObjectPrefabs = new GameObject[3];
+    public float[] spawnRate = new float[3];
     public float[] detectionRanges = new float[3];
+    public int[] upgradeCosts = new int[3];
+    
     //[SerializeField] GameObject[] bulletPrefabs = new GameObject[3];
     public List<GameObject> buildingSpotList = new List<GameObject>();
     public int goldRefund = 0;
@@ -59,7 +64,7 @@ public class TowerBase : MonoBehaviour
         {
             if (enemiesInRange.Count > 0){
                 animator.SetTrigger("isTrigger");
-                yield return new WaitForSeconds(spawnRate);
+                yield return new WaitForSeconds(currentSpawnRate);
             }
             yield return null;
         }
@@ -69,13 +74,26 @@ public class TowerBase : MonoBehaviour
     public virtual void SpawnObject()
     {
         if(enemiesInRange.Count == 0) return;
+        if(GameController.Instance.GetGameOverStatus()) return;
         GameObject bullet = Instantiate(currentSpawnPrefab, SpawnPoint.position, Quaternion.identity, spawnHolder);
         bullet.GetComponent<Bullet>().SetTarget(enemiesInRange[0]);
+    }
+
+    public int GetCurrentDamage(int i)
+    {
+        if(spawnObjectPrefabs[i].TryGetComponent<Bullet>(out Bullet bulletScript))
+        {
+            return bulletScript.damage;
+        }
+        else
+        {
+           return spawnObjectPrefabs[i].GetComponent<Soldier>().damage;
+        }
     }
     #endregion
 
     #region TOWER BODY && TOWER COLLIIDER RANGE
-    public virtual float GetTowerCurrentRange()
+    public virtual float SetTowerCurrentRange()
     {
         return currentRange;
     }
@@ -100,8 +118,8 @@ public class TowerBase : MonoBehaviour
 
     public virtual float GetTowerNextLevelRange()
     {
-        if(currentLevel < upgradeCosts.Length -1)  return detectionRanges[currentLevel + 1];
-        else                                    return detectionRanges[currentLevel];
+        if(currentLevel < 3) return detectionRanges[currentLevel + 1];
+        else                 return detectionRanges[currentLevel];
     }
 
     #endregion

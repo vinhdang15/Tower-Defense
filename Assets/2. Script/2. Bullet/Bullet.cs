@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class Bullet : MonoBehaviour
 {
     public float speed = 15f;
-    public float damage = 1f;
+    public int damage = 1;
     public Transform target;
     [HideInInspector] public Vector2 targetLastPos;
     [HideInInspector] public SpriteRenderer spriteRenderer;

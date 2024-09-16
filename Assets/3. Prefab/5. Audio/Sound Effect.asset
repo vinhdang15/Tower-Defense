@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: add5d9965cf5ecc46b53c7f7ee52c10d, type: 3}
   clickSound: {fileID: 8300000, guid: 4e3211b6f8996ea4c98e0f382d13c801, type: 3}
   BuildSound: {fileID: 8300000, guid: 900897de787160348b332fb105cc6ffb, type: 3}
-  SoldSound: {fileID: 8300000, guid: 32875ec98b538f948a87d062f95d3356, type: 3}
+  AddGoldSound: {fileID: 8300000, guid: 32875ec98b538f948a87d062f95d3356, type: 3}
   arrowSound: {fileID: 8300000, guid: 233cbcc3cc3bcf340880fadf1a533b95, type: 3}
   bomExplosionSound: {fileID: 8300000, guid: 29a96487c2aa4e54d8a46f452f9d467a, type: 3}
   bomWhistleSound: {fileID: 8300000, guid: af20bfdbccc6870488621ca16561e3f8, type: 3}

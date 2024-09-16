@@ -22,6 +22,7 @@ public class WalkingEnemy : Enemy
 
     public override void Move()
     {
+        if(GameController.Instance.GetGameOverStatus()) return;
         if(soldier == null)
         {
             animator.ResetTrigger("isAttack");

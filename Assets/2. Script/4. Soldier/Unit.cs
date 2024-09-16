@@ -8,7 +8,7 @@ public class Unit : MonoBehaviour
     public float speed = 2f;
     public float HpMax;
     public float HpCurrent;
-    public float damage;
+    public int damage;
     public bool isUnderDamgeEffect = false;
 
     // ======= UNIT MOVEMENT =======
@@ -38,6 +38,7 @@ public class Unit : MonoBehaviour
 
      public virtual void Move()
     {
+        if(GameController.Instance.GetGameOverStatus()) return;
         MoveProcess();
     }
 

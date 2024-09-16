@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Tower : TowerBase
 {
-    [Header("Tower Spec")]
-    [SerializeField] GameObject[] bulletPrefabs = new GameObject[3];
+    //[Header("Tower Spec")]
+    //[SerializeField] GameObject[] spawnObjectPrefabs = new GameObject[3];
 
     void Awake()
     {
         currentLevel = 0;
+        currentDamage = GetCurrentDamage(currentLevel);
+        currentSpawnRate = spawnRate[currentLevel];
         currentRange = detectionRanges[currentLevel];
-        currentSpawnPrefab = bulletPrefabs[currentLevel];
+        currentSpawnPrefab = spawnObjectPrefabs[currentLevel];
         GameController.Instance.SpendGold(upgradeCosts[0]);
         goldRefund += upgradeCosts[0];
     }
@@ -28,7 +30,9 @@ public class Tower : TowerBase
     public override void Upgrade(int level)
     {
         currentLevel = level;
+        currentDamage = GetCurrentDamage(currentLevel);
+        currentSpawnRate = spawnRate[level];
         currentRange = detectionRanges[level];
-        currentSpawnPrefab = bulletPrefabs[level];  
+        currentSpawnPrefab = spawnObjectPrefabs[level];  
     }
 }
