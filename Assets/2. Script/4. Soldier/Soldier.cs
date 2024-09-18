@@ -7,7 +7,6 @@ public class Soldier : Unit
 {
     // ======= SOLDIER STATUS =======
     public int index;
-    bool isDead = false;
 
     // ======= SOLDIER ANIMATION =======
     SpriteRenderer spriteRenderer;
@@ -34,7 +33,7 @@ public class Soldier : Unit
     }
     void Update()
     {
-        if(!isDead && !GameController.Instance.GetGameOverStatus()) Move();
+        Move();
     }
 
     public override void Move()
@@ -147,7 +146,6 @@ public class Soldier : Unit
 
     public override void Die()
     {
-        isDead = true;
         spriteRenderer.enabled = false;
         transform.position = transform.parent.position;
         UnTargetEnemy();
@@ -156,7 +154,6 @@ public class Soldier : Unit
 
     void ReActiveSoldier()
     {
-        isDead = false;
         spriteRenderer.enabled = true;
         HpCurrent = HpMax;
         ResetHpBar();

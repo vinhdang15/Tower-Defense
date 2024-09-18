@@ -116,15 +116,13 @@ public class PanelController : PracticalUtilities
         position = hit.collider.transform.parent.parent.position;
         currentTowerBaseScript = hit.collider.transform.parent.GetComponent<TowerBase>();
         currentBodyTowerTrans = hit.collider.transform;         
-        currentLevelDetection.position = currentBodyTowerTrans.position;
-        
-        //ShowCurrentLevelDetection();
-        HideNextlevelDetection();
-        HideCurrentPanel();
-        ShowStatusPanel();
+        currentLevelDetection.position = currentBodyTowerTrans.position; 
         
         currentPanelTrans = upgradePanel;
         currentPanelTrans.position = position;
+        
+        statusPanel.SetCurrentLevelStatusText(currentTowerBaseScript);
+        ShowStatusPanel();
     }
 
     void HandleBarrackBodyHit(RaycastHit2D hit)
@@ -138,6 +136,7 @@ public class PanelController : PracticalUtilities
     {
         Barrack barrackScript = currentBarrack.GetComponent<Barrack>();
         HideCurrentLevleDetection();
+        HideStatusPanel();
         barrackScript.barrackRange.gameObject.SetActive(false);
         barrackScript.UpdateGuardPointPos(worldPos);
         barrackScript.SetSoldierGuardPoint();
@@ -257,6 +256,7 @@ public class PanelController : PracticalUtilities
     public void SetGuardPoint()
     {
         HideCurrentPanel();
+        HideStatusPanel();
         ShowCurrentLevelDetection();
         // delay in 0.2f to avoid click
         Invoke(nameof(ActiveBarrackRange), 0.2f);
@@ -347,7 +347,13 @@ public class PanelController : PracticalUtilities
     // ================== VISIBILITY STATUS PANEL
      void ShowStatusPanel()
     {
+        SetStatusPanelPosition();
         statusPanel.gameObject.SetActive(true);
+    }
+
+    void SetStatusPanelPosition()
+    {
+        statusPanel.MovePosition(currentPanelTrans);
     }
 
     void HideStatusPanel()

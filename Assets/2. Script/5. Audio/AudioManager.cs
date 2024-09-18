@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(audioClip);
     }
 
-    public void PlayLoopingThemeSound(AudioSource audioSource, AudioClip audioClip)
+    public void PlayLoopingSound(AudioSource audioSource, AudioClip audioClip)
     {
         audioSource.clip = audioClip;
         audioSource.loop = true;

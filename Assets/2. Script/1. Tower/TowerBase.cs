@@ -74,7 +74,6 @@ public class TowerBase : MonoBehaviour
     public virtual void SpawnObject()
     {
         if(enemiesInRange.Count == 0) return;
-        if(GameController.Instance.GetGameOverStatus()) return;
         GameObject bullet = Instantiate(currentSpawnPrefab, SpawnPoint.position, Quaternion.identity, spawnHolder);
         bullet.GetComponent<Bullet>().SetTarget(enemiesInRange[0]);
     }

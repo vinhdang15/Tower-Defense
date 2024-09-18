@@ -38,7 +38,6 @@ public class Unit : MonoBehaviour
 
      public virtual void Move()
     {
-        if(GameController.Instance.GetGameOverStatus()) return;
         MoveProcess();
     }
 

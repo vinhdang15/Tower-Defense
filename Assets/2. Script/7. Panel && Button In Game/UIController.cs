@@ -16,12 +16,12 @@ public class UIController : MonoBehaviour
     }
     public void UpdateTotalWaveText(int total)
     {
-        totalWaveText.text = total.ToString();
+        totalWaveText.text = "OF " + total.ToString();
     }
 
     public void UpdateCurrentWaveText(int current)
     {
-        currentWaveText.text = current.ToString() + " OF";
+        currentWaveText.text = current.ToString();
     }
 
     public void UpdateGoldText(int gold)

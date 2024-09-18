@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
     [SerializeField] int initialLive = 10;
     [HideInInspector] public int totalGold;
     [HideInInspector] public int lives;
-    bool gameOver;
     
     void Awake()
     {
@@ -36,7 +35,6 @@ public class GameController : MonoBehaviour
         uiController.UpdateGoldText(totalGold);
         uiController.UpdateLivesText(lives);
         gameOverPanel.SetActive(false);
-        gameOver = false;
     }
 
     public void AddGold(int gold)
@@ -57,7 +55,7 @@ public class GameController : MonoBehaviour
         uiController.UpdateLivesText(lives);
         if(lives == 0)
         {
-            gameOver = true;
+            PauseGame();
             ShowGameOverPanel();
         }
     }
@@ -78,8 +76,14 @@ public class GameController : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
     }
-    public bool GetGameOverStatus()
+
+    public void PauseGame()
     {
-        return gameOver;
+        Time.timeScale = 0;
+    }
+
+    public void ResumingGame()
+    {
+        Time.timeScale = 1;
     }
 }
