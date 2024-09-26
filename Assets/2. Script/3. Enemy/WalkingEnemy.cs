@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WalkingEnemy : Enemy
 {
-    [SerializeField] int enemyGold;
+    
     public Soldier soldier;
     
     void Start()
@@ -31,11 +31,7 @@ public class WalkingEnemy : Enemy
         else CheckToAnimationFightingState();
     }
 
-    public override void Die()
-    {
-        GameController.Instance.AddGold(enemyGold);
-        Destroy(gameObject);
-    }
+    
 
     public override void CheckToAnimationFightingState()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
+    [SerializeField] int enemyGold;
     public Vector2 currentPos;
     public void SetEnemyDirection()
     {
@@ -19,6 +20,13 @@ public class Enemy : Unit
         if(other.CompareTag("EndPoint"))
         {
             GameController.Instance.UpdateLives(-1);
+            Destroy(gameObject);
         }
+    }
+
+    public override void Die()
+    {
+        GameController.Instance.AddGold(enemyGold);
+        Destroy(gameObject);
     }
 }

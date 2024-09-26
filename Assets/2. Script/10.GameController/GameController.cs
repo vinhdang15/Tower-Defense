@@ -6,8 +6,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
-    [SerializeField] UIController uiController;
+    [SerializeField] GameStatus uiController;
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject victoryPanel;
+    [SerializeField] GameObject pausePanel;
     [SerializeField] int totalWave;
     [SerializeField] int currentWave;
     [SerializeField] int initialGold = 100;
@@ -30,11 +32,12 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        ResumingGame();
         totalGold = initialGold;
         lives = initialLive;
         uiController.UpdateGoldText(totalGold);
         uiController.UpdateLivesText(lives);
-        gameOverPanel.SetActive(false);
+        HideAllPanel();
     }
 
     public void AddGold(int gold)
@@ -56,25 +59,46 @@ public class GameController : MonoBehaviour
         if(lives == 0)
         {
             PauseGame();
-            ShowGameOverPanel();
+            ShowGameOverMenu();
         }
     }
 
-    public void UpdateTotalWave(int total)
+    public void UpdateTotalWaveText(int total)
     {
         totalWave = total;
         uiController.UpdateTotalWaveText(totalWave);
     }
 
-    public void UpdateCurrentWave(int current)
+    public void UpdateCurrentWaveText(int current)
     {
         currentWave = current;
         uiController.UpdateCurrentWaveText(currentWave);
     }
 
-    void ShowGameOverPanel()
+    void ShowGameOverMenu()
     {
         gameOverPanel.SetActive(true);
+    }
+
+    public void ShowVictoryMenu()
+    {
+        victoryPanel.SetActive(true);
+    }
+ 
+    public void ShowPauseMenu()
+    {
+        pausePanel.SetActive(true);
+    }
+
+    public void HidePauseMenu()
+    {
+        pausePanel.SetActive(false);
+    }
+
+    void HideAllPanel()
+    {
+        gameOverPanel.SetActive(false);
+        victoryPanel.SetActive(false);
     }
 
     public void PauseGame()

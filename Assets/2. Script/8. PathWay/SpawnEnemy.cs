@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    
     SpawnEnemyManager spawnEnemyManager;
-    [SerializeField] CautionSlider cautionSlider;
+    [SerializeField] BtnCautionSlider cautionSlider;
     [SerializeField] List<EnemyEntry> enemyEntries = new List<EnemyEntry>();
     [SerializeField] float timeBetweenEnemy;
+    [SerializeField] float elapsed;
+    [SerializeField] SoundEffectSO soundEffectSO;
+
     public int currentWave;
     public bool cautionButtonClicked = false;
-    public float elapsed;
-
-    [SerializeField] SoundEffectSO soundEffectSO;
+    public int EnemiesInPathCount;
+    public List<GameObject> EnemiesInPathList = new();
 
     void Awake()
     {
         currentWave = 0;
+        GetTotalEnemiesInPath();     
     }
 
     public void Initialize(SpawnEnemyManager manager)
@@ -40,7 +42,7 @@ public class SpawnEnemy : MonoBehaviour
     IEnumerator InstantiateEnemyWave()
     {
         currentWave = 1;
-        GameController.Instance.UpdateCurrentWave(currentWave);
+        GameController.Instance.UpdateCurrentWaveText(currentWave);
         for(int y = 0; y < enemyEntries.Count; y++)
         {
             for(int i = 0; i < enemyEntries[y].numberEnemyInWave; i++)
@@ -51,8 +53,8 @@ public class SpawnEnemy : MonoBehaviour
             currentWave++;
             // cause the number enemy been spawn in each wave of each path is different
             // so the time to finish of each wave is not the same
-            // then need wait until they are get in the same wave to begin the next wave  
-            // Check Current wave Index of each Land
+            // then need to wait until they are get in the same wave index to begin the next wave  
+            // Check Current wave Index of each path
             spawnEnemyManager.CheckCurrentwaveIndex();
             // wait until all land are in the same wait
             yield return new WaitUntil(() => spawnEnemyManager.beginNextWave);
@@ -86,7 +88,7 @@ public class SpawnEnemy : MonoBehaviour
             
             if(currentWave <= enemyEntries.Count)
             {
-                GameController.Instance.UpdateCurrentWave(currentWave);
+                GameController.Instance.UpdateCurrentWaveText(currentWave);
                 spawnEnemyManager.PlaySound();
             }
         }
@@ -108,12 +110,39 @@ public class SpawnEnemy : MonoBehaviour
     {
         GameObject enemyInstantiate = Instantiate(enemy, transform);
         enemyInstantiate.GetComponent<PathFinder>().SetPosInPathWave(index % 3);
+        EnemiesInPathList.Add(enemyInstantiate);
     }
 
     public int GetTotalWave()
     {
         return enemyEntries.Count;
     }
+
+    private void GetTotalEnemiesInPath()
+    {
+        foreach(var entries in enemyEntries)
+        {
+            EnemiesInPathCount += entries.numberEnemyInWave;
+        }
+    }
+
+    private bool AllEnemiesDead()
+    {
+        foreach(GameObject enemy in EnemiesInPathList)
+        {
+            if(enemy != null) return false;
+        }
+        return true;
+    }
+    public bool EnemiesSpawnedAndDead()
+    {
+        if(EnemiesInPathCount != EnemiesInPathList.Count) return false;
+
+        if(AllEnemiesDead()) return true;
+        else return false;
+    }
+
+
 }
 
 [System.Serializable]

@@ -77,14 +77,19 @@ public class Soldier : Unit
     {
         if(enemyInRange.Count == 0) return;
         if(targetEnemy != null && hadTarget == true) return;
-        foreach( var enemy in enemyInRange)
+        //foreach( var enemy in enemyInRange)
+        for (int i = 0; i < enemyInRange.Count; i++)
         {
-            if(enemy == null) return;
-            if (enemy.GetComponent<WalkingEnemy>().soldier == null)
+            if(enemyInRange[i] == null)
             {
-                targetEnemy = enemy;
+                enemyInRange.RemoveAt(i);
+                Debug.Log("avoid enemy null succset");
+            }
+            if (enemyInRange[i].GetComponent<WalkingEnemy>().soldier == null)
+            {
+                targetEnemy = enemyInRange[i];
                 hadTarget = true;
-                enemy.GetComponent<WalkingEnemy>().soldier = this;
+                enemyInRange[i].GetComponent<WalkingEnemy>().soldier = this;
                 break;
             } 
         }
