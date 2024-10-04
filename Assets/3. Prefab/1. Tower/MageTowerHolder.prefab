@@ -111,12 +111,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1424504573, guid: 52973009b60930d4ea3571863d31a41c, type: 3}
+  m_Sprite: {fileID: -788281185, guid: 52973009b60930d4ea3571863d31a41c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.8285714, y: 3.6571429}
+  m_Size: {x: 1.28, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1948b55d59a914b9abe45c174b08a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpawnRate: 0
   currentDamage: 0
+  currentSpawnRate: 0
   SpawnPoint: {fileID: 7900178569398308145}
   spawnHolder: {fileID: 0}
   enemiesInRange: []
@@ -231,7 +231,6 @@ MonoBehaviour:
   - {fileID: 6279879979122603702, guid: c58c9b8a43fa8264da514d1e8a1b9de0, type: 3}
   - {fileID: 6279879979122603702, guid: fa211b273c758a648ba1a7698a43885b, type: 3}
   - {fileID: 6279879979122603702, guid: fa211b273c758a648ba1a7698a43885b, type: 3}
-  upgradeCosts: 280000005a00000096000000
   spawnRate:
   - 2
   - 2
@@ -240,6 +239,7 @@ MonoBehaviour:
   - 4
   - 5
   - 6
+  upgradeCosts: 280000005a00000096000000
   buildingSpotList: []
   goldRefund: 0
   TowerBodyRadius: 0.7

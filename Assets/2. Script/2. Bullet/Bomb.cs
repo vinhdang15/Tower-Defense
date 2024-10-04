@@ -7,7 +7,7 @@ public class Bomb : ParapolBullet
 {
     [SerializeField] Animator animator;
     [SerializeField] float boomRange = 2f;
-    [SerializeField] List<Unit> enemiesInRange = new List<Unit>();
+    [SerializeField] List<Character> enemiesInRange = new List<Character>();
     CircleCollider2D circleCollider2D;
     Coroutine moveBulletCoroutine;
     void Start()
@@ -42,7 +42,7 @@ public class Bomb : ParapolBullet
     {
         if (other.CompareTag("GroundEnemy"))
         {
-            enemiesInRange.Add(other.GetComponent<Unit>());       
+            enemiesInRange.Add(other.GetComponent<Character>());       
         }
     }
 
@@ -50,7 +50,7 @@ public class Bomb : ParapolBullet
     {
         if (other.CompareTag("GroundEnemy"))
         {
-            enemiesInRange.Remove(other.GetComponent<Unit>());
+            enemiesInRange.Remove(other.GetComponent<Character>());
         }
     }
 
@@ -67,8 +67,8 @@ public class Bomb : ParapolBullet
     public void TakeDamageInRange()
     {   
         if(enemiesInRange.Count == 0) return; 
-        List<Unit> enemies = new List<Unit>(enemiesInRange);
-        foreach(Unit enemy in enemies)
+        List<Character> enemies = new List<Character>(enemiesInRange);
+        foreach(Character enemy in enemies)
         {   
             if(enemy != null) enemy.TakeDamage(damage);
         }

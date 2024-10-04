@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1948b55d59a914b9abe45c174b08a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpawnRate: 0
   currentDamage: 0
+  currentSpawnRate: 0
   SpawnPoint: {fileID: 5226077520245723931}
   spawnHolder: {fileID: 0}
   enemiesInRange: []
@@ -230,15 +230,15 @@ MonoBehaviour:
   - {fileID: 8148968284486878133, guid: 510e41e1858abb24f8aefc2873f38288, type: 3}
   - {fileID: 8148968284486878133, guid: dca009b2abb843941aec5fbf6e6d7417, type: 3}
   - {fileID: 8148968284486878133, guid: dca009b2abb843941aec5fbf6e6d7417, type: 3}
-  upgradeCosts: 1e0000002d00000050000000
   spawnRate:
   - 0.7
-  - 0.7
-  - 0.35
+  - 0.5
+  - 0.3
   detectionRanges:
   - 6
   - 7
   - 8
+  upgradeCosts: 1e0000002d00000050000000
   buildingSpotList: []
   goldRefund: 0
   TowerBodyRadius: 0.7

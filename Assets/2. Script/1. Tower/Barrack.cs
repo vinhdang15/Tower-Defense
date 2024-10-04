@@ -44,6 +44,7 @@ public class Barrack : TowerBase
             Soldier soldierScript =  soldier.GetComponent<Soldier>();
             soldierList.Add(soldierScript);
             soldierScript.index = i;
+            soldierScript.barrack = this;
             i++;
             SetSoldierGuardPoint();
         }

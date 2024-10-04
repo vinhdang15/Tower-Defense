@@ -75,7 +75,7 @@ public class Bullet : MonoBehaviour
         if (target != null)
         {
             StartCoroutine(PlaySoundAndDestroyWhenHit());
-            target.GetComponent<Unit>().TakeDamage(damage);
+            target.GetComponent<Character>().TakeDamage(damage);
             spriteRenderer.enabled = false;
         }
     }
