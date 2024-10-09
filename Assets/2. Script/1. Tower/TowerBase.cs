@@ -75,12 +75,12 @@ public class TowerBase : MonoBehaviour
     {
         if(enemiesInRange.Count == 0) return;
         GameObject bullet = Instantiate(currentSpawnPrefab, SpawnPoint.position, Quaternion.identity, spawnHolder);
-        bullet.GetComponent<Bullet>().SetTarget(enemiesInRange[0]);
+        bullet.GetComponent<BulletBase>().SetTarget(enemiesInRange[0]);
     }
 
     public int GetCurrentDamage(int i)
     {
-        if(spawnObjectPrefabs[i].TryGetComponent<Bullet>(out Bullet bulletScript))
+        if(spawnObjectPrefabs[i].TryGetComponent<BulletBase>(out BulletBase bulletScript))
         {
             return bulletScript.damage;
         }

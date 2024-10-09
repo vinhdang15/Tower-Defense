@@ -14,7 +14,7 @@ public class Bomb : ParapolBullet
     {
         circleCollider2D = GetComponent<CircleCollider2D>();
         animator = GetComponent<Animator>();
-        SetBoomRange();
+        SetBombRange();
 
         instantiatePoint = transform.position;
         lineRenderer = GetComponent<LineRenderer>();
@@ -34,11 +34,11 @@ public class Bomb : ParapolBullet
         OnReachTargetLastPos();
     }
 
-    void SetBoomRange()
+    void SetBombRange()
     {
         circleCollider2D.radius = boomRange;
     }
-    public override void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("GroundEnemy"))
         {
@@ -54,7 +54,7 @@ public class Bomb : ParapolBullet
         }
     }
 
-    public override void OnReachTargetLastPos()
+    protected override void OnReachTargetLastPos()
     {
         if (IsReachTargetLastPos())
         {

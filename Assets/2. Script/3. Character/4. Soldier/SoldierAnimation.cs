@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierAnimation : CharacterAnimation
+public class SoldierAnimation : CharacterAnimationBase
 {
-    [SerializeField] float attackSpeed;
-    Soldier soldier;
+    Soldier thisSoldier;
     protected override void Start()
     {
         base.Start();
-        attackSpeed = 2f;
-        soldier = GetComponent<Soldier>();
+        thisSoldier = GetComponent<Soldier>();
         StartCoroutine(DoAnimation());
     }
 
@@ -18,22 +16,29 @@ public class SoldierAnimation : CharacterAnimation
     {
         while(true)
         {
-            if(soldier.IsMovingToGuardPoint())
+            if(thisSoldier.IsMovingToGuardPoint() || thisSoldier.IsMovingToEnemy())
             {
-                base.Walk();
-                Debug.Log("walk");
+                base.WalkingState();
+                //Debug.Log("walk");
             }
-            else if(soldier.IsInStandingPos())
+            else if(thisSoldier.IsInGuardPos())
             {
-                base.Idle();
-                Debug.Log("Idle");
+                base.IdleState();
+                //Debug.Log("Idle");
             }
-            else if(soldier.IsInAttackPos())
+            else if(thisSoldier.IsEnemyInFront())
             {
-                base.Attack();
-                Debug.Log("attack");
+                base.AttackingState();
+                //Debug.Log("attack");
             }
             yield return new WaitForSeconds(0.1f);
+
+            if(thisSoldier.IsDead())
+            {
+                base.DeadState();
+                //Debug.Log("Dead");
+                yield return new WaitUntil(() => !thisSoldier.IsDead());
+            }
         }
     }
 }

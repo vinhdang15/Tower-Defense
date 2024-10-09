@@ -7,7 +7,7 @@ public class Soldier : Character
 {
     // ======= SOLDIER STATUS =======
     public int index;
-    public bool isDead = false;
+    
     public Barrack barrack;
 
     // ======= SOLDIER ANIMATION =======
@@ -27,7 +27,6 @@ public class Soldier : Character
 
     void Start()
     {
-        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         currentLocalScale = transform.localScale;
@@ -40,7 +39,11 @@ public class Soldier : Character
 
     public override void Move()
     {
-        if(isDead) return;
+        if(base.IsDead())
+        {
+            UnTargetEnemy();
+            return;
+        }
         
         if(IsMovingToGuardPoint())
         {
@@ -53,7 +56,6 @@ public class Soldier : Character
             moveToGuardPoint = false;
             SetTargetEnemy();
             MoveToTargetEnemy();
-            CheckToAnimationFightingState();
             
             if(targetEnemy != null)
             {
@@ -61,15 +63,6 @@ public class Soldier : Character
             }          
         }
 
-        // if(transform.position == (Vector3)guardPointPos || 
-        //    targetEnemy != null && transform.position == (Vector3)targetPosition)
-        // {
-        //     AnimationBlendState(true);
-        // }
-        // else  
-        // {
-        //     AnimationBlendState(false);
-        // }
     }
 
     public bool IsMovingToGuardPoint()
@@ -82,12 +75,19 @@ public class Soldier : Character
         return false;
     }
 
-    public bool IsInStandingPos()
+    public bool IsMovingToEnemy()
+    {
+        if(targetEnemy == null) return false;
+        else if(transform.position != (Vector3)targetPosition) return true;
+        return false;
+    }
+
+    public bool IsInGuardPos()
     {
         return transform.position == (Vector3)guardPointPos;
     }
 
-    public bool IsInAttackPos()
+    public bool IsEnemyInFront()
     {
         if(targetEnemy != null) return transform.position == (Vector3)targetPosition;
         else return false;
@@ -111,7 +111,7 @@ public class Soldier : Character
     {
         if(enemyInRange.Count == 0) return;
         if(targetEnemy != null && hadTarget == true) return;
-        //foreach( var enemy in enemyInRange)
+
         for (int i = 0; i < enemyInRange.Count; i++)
         {
             if(enemyInRange[i] == null)
@@ -127,6 +127,7 @@ public class Soldier : Character
                 break;
             } 
         }
+
         if(targetEnemy == null)
         {
             targetEnemy = enemyInRange[0];
@@ -148,7 +149,6 @@ public class Soldier : Character
 
     void UnTargetEnemy()
     {
-        //animator.SetBool("isAttack", false);
         if(targetEnemy == null) return;
         targetEnemy.GetComponent<WalkingEnemy>().soldier = null;
         targetEnemy = null;
@@ -167,15 +167,6 @@ public class Soldier : Character
         }
     }
 
-
-    // public override void CheckToAnimationFightingState()
-    // {
-    //     if(targetPosition == (Vector2)transform.position)
-    //     {
-    //         animator.SetBool("isAttack", true);
-    //     }
-    // }
-
     // Animation event
     public void AttackEnemy()
     {
@@ -184,21 +175,19 @@ public class Soldier : Character
         targetEnemy.GetComponent<WalkingEnemy>().TakeDamage(damage);
     }
 
-    public override void Die()
+    // Animation event
+    public override void OnDead()
     {
-        isDead = true;
-        DisableSprites();       
-        UnTargetEnemy();
+        DisableSprites();
         transform.position = transform.parent.position;
         Invoke(nameof(ReActiveSoldier), barrack.currentSpawnRate);
     }
-
+    
     void ReActiveSoldier()
     {
-        isDead = false;
         HpCurrent = HpMax;             
         ResetHpBar();
-        EnableSprites(); 
+        EnableSprites();
     }
 
     private void DisableSprites()

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Arrow : ParapolBullet
 {
+    SpriteRenderer spriteRenderer;
     [SerializeField] Animator animator;
+    bool isReachTarget = false;
     Coroutine moveBulletCoroutine;
     void Start()
     {
@@ -22,31 +24,47 @@ public class Arrow : ParapolBullet
 
     void Update()
     {
+        if(isReachTarget) return;
         CalBulletSpeedAndAngle();
         CalTrajectory();
-        OnReachTargetLastPos();
-    }
-
-    public override void OnReachTargetLastPos()
-    {
-        if(target != null) return;       
-        if (IsReachTargetLastPos())
-        {   
-            StopCoroutine(moveBulletCoroutine);
-            animator.SetTrigger("IsHitGround");          
+        if(IsReachTargetLastPos())
+        {
+            OnReachTargetLastPos();
+            isReachTarget = true;
         }
     }
 
-    public override IEnumerator PlaySoundAndDestroyWhenHit()
+    protected override void OnReachTargetLastPos()
+    {
+        // if(target != null) return;       
+        // if (IsReachTargetLastPos())
+        // {   
+        //     base.EnabeTrailRenderer();
+        //     StopCoroutine(moveBulletCoroutine);
+        //     animator.SetTrigger("IsHitGround");          
+        // }
+        StopCoroutine(moveBulletCoroutine);
+        base.EnabeTrailRenderer();
+        
+        
+        
+        if(target != null)
+        {
+            StartCoroutine(PlaySoundAndDestroyWhenHit());
+            target.GetComponent<Enemy>().TakeDamage(damage);
+            spriteRenderer.enabled = false;
+        }
+        else
+        {
+            AudioManager.Instance.PlaySound(audioSource, soundEffectSO.arrowSound);
+            animator.SetTrigger("IsHitGround");
+        }
+    }
+
+    private IEnumerator PlaySoundAndDestroyWhenHit()
     {
         yield return AudioManager.Instance.PlaySoundAndWait(audioSource, soundEffectSO.arrowSound);
         Destroy(gameObject);
-    }
-
-    // Animation Event
-    public void PlaySoundWhenHitGround()
-    {
-        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.arrowSound);
     }
 
     // Animation Event

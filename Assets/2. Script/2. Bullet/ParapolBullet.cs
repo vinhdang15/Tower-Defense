@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParapolBullet : Bullet
+public abstract class ParapolBullet : BulletBase
 {
     public LineRenderer lineRenderer;
     [HideInInspector] public Vector2 instantiatePoint;
     [HideInInspector] public int Trajectory_num = 50;
-    Vector2 bulletLastPosition;
-    float initialAngleDeg;
-    float initialAngleRad;
-    float config = 0.1f;
-    float V;
-    float gravity = 9.8f;
+    private Vector2 bulletLastPosition;
+    private float initialAngleDeg;
+    private float initialAngleRad;
+    private float config = 0.1f;
+    private float V;
+    private float gravity = 9.8f;
 
-    List<Vector2> trajectoryPoints = new List<Vector2>();
-    float speedY = 0f;
+    private List<Vector2> trajectoryPoints = new List<Vector2>();
+    private float speedY = 0f;
 
-    public virtual void CalTrajectory()
+    protected virtual void CalTrajectory()
     {
         if(target == null) return;
         CalInitialAngle();
@@ -41,7 +41,7 @@ public class ParapolBullet : Bullet
         }
     }
 
-    void CalInitialAngle()
+    private void CalInitialAngle()
     {
         float X = target.position.x - instantiatePoint.x;
         float Y = target.position.y - instantiatePoint.y;
@@ -54,7 +54,7 @@ public class ParapolBullet : Bullet
         initialAngleRad = initialAngleDeg * Mathf.Deg2Rad;
     }
 
-    void calV()
+    private void calV()
     {
         float X = target.position.x - instantiatePoint.x;
         float Y = target.position.y - instantiatePoint.y;
@@ -75,7 +75,7 @@ public class ParapolBullet : Bullet
         V = Mathf.Sqrt(v2);
     }
 
-    public virtual void CalBulletSpeedAndAngle()
+    protected virtual void CalBulletSpeedAndAngle()
     {
         if (bulletLastPosition != null)
         {
@@ -88,29 +88,14 @@ public class ParapolBullet : Bullet
         bulletLastPosition = transform.position;
     }
 
-    void CalArrowRotate()
+    private void CalArrowRotate()
     {
-        // angle_XAxis
         Vector2 moveDir = bulletLastPosition - (Vector2)transform.position;
         float tangentAngle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-
-        // angle_Deg_YAxis
-        // Vector3 dir = (Vector2)target.position - instantiatePoint;
-        // Vector3 normalizedVector = dir.normalized;
-        // float dotProduct = Vector3.Dot(normalizedVector, Vector3.up);
-
-        // float angle_rad_YAxis = Mathf.Acos(dotProduct);
-        // float angle_Deg_YAxis = angle_rad_YAxis * Mathf.Rad2Deg;
-        // if(angle_Deg_YAxis < 60)
-        // {
-        //     angle_Deg_YAxis = 60;
-        // }
-    
-        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90- angle_Deg_YAxis, tangentAngle + 180), 3f);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0, tangentAngle - 90), 3f);
     }
 
-    void AdjustSpeed()
+    private void AdjustSpeed()
     {
         if(bulletLastPosition.y > transform.position.y)
         {
@@ -122,7 +107,7 @@ public class ParapolBullet : Bullet
         }
     }
 
-    public override IEnumerator MoveProcess()
+    protected override IEnumerator MoveProcess()
     {        
         for (int i = 0; i < trajectoryPoints.Count; i++)
         {  

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     // ======= STATUS =======
     public float speed = 2f;
@@ -18,9 +18,6 @@ public class Character : MonoBehaviour
 
     // ======= HEALTH BAR =======
     public HealthBar healthBar;
-    
-    // ======= ANIMATION =======
-    public Animator animator;
 
     // ======= SOUND =======
     [HideInInspector] public AudioSource audioSource;
@@ -52,7 +49,7 @@ public class Character : MonoBehaviour
         healthBar.Resize(HpMax, damage);
         if (HpCurrent <= 0)
         {
-            Die();
+            healthBar.gameObject.SetActive(false);
         }
     }
 
@@ -65,21 +62,11 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void AnimationBlendState(bool isfighting)
+    public virtual bool IsDead()
     {
-        int state = isfighting ? 1: 0;
-        animator.SetFloat("Blend", state);
-    }
-    
-    public virtual void CheckToAnimationFightingState()
-    {
-
+        return HpCurrent <= 0;
     }
 
-    public virtual void Die()
-    {
-
-    }
-
+    public abstract void OnDead();
     
 }

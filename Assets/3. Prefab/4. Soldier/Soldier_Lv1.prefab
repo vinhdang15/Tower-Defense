@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6175bf8f31fb9e74b8c58c2a09f80589, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 17cda34c0e0dddf46b90ef9f8d738561, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.42666668, y: 0.42666668}
+  m_Size: {x: 1.1111112, y: 1.1111112}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -257,17 +257,15 @@ MonoBehaviour:
   speed: 1.5
   HpMax: 20
   HpCurrent: 0
-  damage: 3
+  damage: 7
   isUnderDamgeEffect: 0
   fontPoint: {fileID: 0}
   previousPos: {x: 0, y: 0}
   direction: {x: 0, y: 0}
   healthBar: {fileID: 2634757732055595792}
-  animator: {fileID: 0}
   audioSource: {fileID: 0}
   soundEffectSO: {fileID: 11400000, guid: 58f3b842f8497a046a2a1acaa17e7bc7, type: 2}
   index: 0
-  isDead: 0
   barrack: {fileID: 0}
   guardPointChild: {fileID: 0}
   guardPointPos: {x: 0, y: 0}
@@ -288,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878a60ddf0853a64b82b013a48ccd844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 2
 --- !u!1001 &5306997254870285002
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,32 +3,30 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 
-public class Magic : Bullet
+public class Magic : BulletBase
 {
     [SerializeField] private float dealDamageTimeAmount = 0.5f;
+    MagicAnimation magicAnimation;
+    SpriteRenderer sprite;
     void Start()
     {
+        magicAnimation = GetComponent<MagicAnimation>();
+        sprite = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(MoveProcess());
         AudioManager.Instance.PlaySound(audioSource, soundEffectSO.MagicBallWhistleSound);
     }
 
-    public override void HitTarget()
+    protected override void OnReachTargetLastPos()
     {
-        if (target != null)
-        {   
-            AudioManager.Instance.PlaySound(audioSource, soundEffectSO.MagicBallHitSound);
-            StartCoroutine(PlaySoundAndDestroyWhenHit());
+        AudioManager.Instance.PlaySound(audioSource, soundEffectSO.MagicBallHitSound);
+        if(target != null)
+        {
             StartTakeDamageCoroutine();
-            transform.GetComponent<SpriteRenderer>().enabled = false;
+            magicAnimation.HitEnemyState();
         }
+        else magicAnimation.HitGroundState();
     }
-
-    // public override IEnumerator PlaySoundAndDestroyWhenHit()
-    // {
-    //     yield return AudioManager.Instance.PlaySoundAndWait(audioSource, soundEffectSO.MagicBallWhistleSound);
-    //     Destroy(gameObject);
-    // }
 
     IEnumerator TakeDamage()
     {
@@ -47,7 +45,7 @@ public class Magic : Bullet
         Destroy(gameObject);
     }
 
-    void StartTakeDamageCoroutine()
+    public void StartTakeDamageCoroutine()
     {
         Enemy targetScript = target.GetComponent<Enemy>();
         targetScript.TakeDamage(damage);      
@@ -55,9 +53,22 @@ public class Magic : Bullet
         {
             targetScript.isUnderDamgeEffect = true;
             StartCoroutine(TakeDamage());
-        }else
+        }
+        else
         {
             Destroy(gameObject);
         }
+    }
+
+    // Animation Event
+    public void HideBulletSprite()
+    {
+        sprite.enabled = false;
+    }
+
+    // Animation Event
+    public void OnDestroy()
+    {
+        Destroy(gameObject);
     }
 }

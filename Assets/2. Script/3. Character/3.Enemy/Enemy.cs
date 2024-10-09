@@ -24,7 +24,8 @@ public class Enemy : Character
         }
     }
 
-    public override void Die()
+    // Animation event
+    public override void OnDead()
     {
         GameController.Instance.AddGold(enemyGold);
         Destroy(gameObject);
