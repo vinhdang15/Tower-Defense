@@ -30,15 +30,6 @@ public class PathFinder : MonoBehaviour
 
     public void FollowPath(float speed)
     {
-        // foreach(Transform target in waypoints)
-        // {
-        //     while(transform.position != target.position)
-        //     {
-        //         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        //         Debug.Log("check");
-        //     }
-        // }
-
         if (wayPointIndex < waypoints.Count)
         {
             if(transform.position != waypoints[wayPointIndex].position)

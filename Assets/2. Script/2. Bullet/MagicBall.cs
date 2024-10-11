@@ -1,20 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 
-public class Magic : BulletBase
+public class MagicBall : BulletBase
 {
     [SerializeField] private float dealDamageTimeAmount = 0.5f;
-    MagicAnimation magicAnimation;
-    SpriteRenderer sprite;
-    void Start()
+    private Enemy targetScript;
+    private MagicAnimation magicAnimation;
+    private SpriteRenderer sprite;
+
+    private void Awake()
     {
         magicAnimation = GetComponent<MagicAnimation>();
         sprite = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-        StartCoroutine(MoveProcess());
+    }
+    private void Start()
+    {
+        GetEnemyScript();
         AudioManager.Instance.PlaySound(audioSource, soundEffectSO.MagicBallWhistleSound);
+        StartCoroutine(MoveTowardProcess());
+    }
+
+    private void GetEnemyScript()
+    {
+        if(target != null)
+        {
+            targetScript = target.GetComponent<Enemy>();
+        }
     }
 
     protected override void OnReachTargetLastPos()
@@ -23,16 +36,29 @@ public class Magic : BulletBase
         if(target != null)
         {
             StartTakeDamageCoroutine();
-            magicAnimation.HitEnemyState();
         }
         else magicAnimation.HitGroundState();
     }
 
-    IEnumerator TakeDamage()
+    private void StartTakeDamageCoroutine()
+    {
+        targetScript.TakeDamage(damage);      
+        if(!targetScript.isUnderDamgeEffect)
+        {
+            magicAnimation.HitEnemyState();
+            targetScript.isUnderDamgeEffect = true;
+            StartCoroutine(TakeDamage());
+        }
+        else
+        {
+            magicAnimation.HitTargetAndDestroyState();
+        }
+    }
+
+    private IEnumerator TakeDamage()
     {
         int dealDamageCount = 0;
-        Enemy targetScript = target.GetComponent<Enemy>();
-        targetScript.speed *= 0.5f;
+        targetScript.currentSpeed *= 0.5f;
         while(dealDamageCount <= 2)
         {   
             dealDamageCount++;
@@ -40,24 +66,8 @@ public class Magic : BulletBase
             if (target != null) targetScript.TakeDamage(damage);
             else break;
         }
-        targetScript.speed *= 2f;
-        targetScript.isUnderDamgeEffect = false;
+        targetScript.RestCharacterState();
         Destroy(gameObject);
-    }
-
-    public void StartTakeDamageCoroutine()
-    {
-        Enemy targetScript = target.GetComponent<Enemy>();
-        targetScript.TakeDamage(damage);      
-        if(targetScript.isUnderDamgeEffect == false)
-        {
-            targetScript.isUnderDamgeEffect = true;
-            StartCoroutine(TakeDamage());
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     // Animation Event

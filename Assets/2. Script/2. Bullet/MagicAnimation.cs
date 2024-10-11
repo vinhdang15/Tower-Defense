@@ -14,11 +14,18 @@ public class MagicAnimation : BulletAnimationBase
     {
         base.ShootingState();
     }
+    // For deal damage and cause effects
     public override void HitEnemyState()
     {
         base.HitEnemyState();
     }
     public override void HitGroundState()
+    {
+       base.HitGroundState();
+    }
+
+    // For deal damage but don't cause effects
+    public void HitTargetAndDestroyState()
     {
        base.HitGroundState();
     }

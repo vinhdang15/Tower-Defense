@@ -37,7 +37,7 @@ public class Soldier : Character
         Move();
     }
 
-    public override void Move()
+    protected override void Move()
     {
         if(base.IsDead())
         {
@@ -48,7 +48,7 @@ public class Soldier : Character
         if(IsMovingToGuardPoint())
         {
             UnTargetEnemy();
-            MoveProcess();
+            MoveToGuardPoint();
             SetSoldierDirect(guardPointPos);
         }
         else
@@ -65,6 +65,11 @@ public class Soldier : Character
 
     }
 
+    private void MoveToGuardPoint()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, guardPointPos, speed *Time.deltaTime);
+    }
+    
     public bool IsMovingToGuardPoint()
     {
         if(transform.position != (Vector3)guardPointPos)
@@ -93,10 +98,7 @@ public class Soldier : Character
         else return false;
     }
 
-    public override void MoveProcess()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, guardPointPos, speed *Time.deltaTime);
-    }
+    
 
     public void GetGuardPoints()
     {

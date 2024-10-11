@@ -24,6 +24,11 @@ public class Enemy : Character
         }
     }
 
+    protected override void Move()
+    {
+
+    }
+
     // Animation event
     public override void OnDead()
     {

@@ -29,10 +29,6 @@ public class Tower : TowerBase
 
     public override void Upgrade(int level)
     {
-        currentLevel = level;
-        currentDamage = GetCurrentDamage(currentLevel);
-        currentSpawnRate = spawnRate[level];
-        currentRange = detectionRanges[level];
-        currentSpawnPrefab = spawnObjectPrefabs[level];  
+        base.Upgrade(level);
     }
 }

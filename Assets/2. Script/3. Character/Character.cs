@@ -6,6 +6,7 @@ public abstract class Character : MonoBehaviour
 {
     // ======= STATUS =======
     public float speed = 2f;
+    public float currentSpeed;
     public float HpMax;
     public float HpCurrent;
     public int damage;
@@ -20,29 +21,26 @@ public abstract class Character : MonoBehaviour
     public HealthBar healthBar;
 
     // ======= SOUND =======
-    [HideInInspector] public AudioSource audioSource;
-    public SoundEffectSO soundEffectSO;
+    protected AudioSource audioSource;
+    [SerializeField] protected SoundEffectSO soundEffectSO;
     
-    public void SetupHpCurrent()
+    protected void SetupHpCurrent()
     {
         HpCurrent = HpMax;
     }
 
-    public void ResetHpBar()
+    protected void SetDefaultSpeed()
+    {
+        currentSpeed = speed;
+    }
+
+    protected void ResetHpBar()
     {
         healthBar.Reset();
     }
 
-     public virtual void Move()
-    {
-        MoveProcess();
-    }
+    protected abstract void Move();
 
-    public virtual void MoveProcess()
-    {
-        gameObject.GetComponent<PathFinder>().FollowPath(speed);
-    }
-    
     public void TakeDamage(float damage)
     {
         HpCurrent -= damage;
@@ -67,6 +65,11 @@ public abstract class Character : MonoBehaviour
         return HpCurrent <= 0;
     }
 
+    public virtual void RestCharacterState()
+    {
+        currentSpeed = speed;
+        isUnderDamgeEffect = false;
+    }
+
     public abstract void OnDead();
-    
 }

@@ -17,11 +17,11 @@ public class Bomb : ParapolBullet
         SetBombRange();
 
         instantiatePoint = transform.position;
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = Trajectory_num;
+        //lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer.positionCount = Trajectory_num;
         CalTrajectory();
-        CalBulletSpeedAndAngle();
-        moveBulletCoroutine = StartCoroutine(MoveProcess());
+        UpdateBulletSpeedAndAngle();
+        moveBulletCoroutine = StartCoroutine(MoveInParapolProcess());
 
         audioSource = GetComponent<AudioSource>();
         AudioManager.Instance.PlaySound(audioSource, soundEffectSO.bomWhistleSound);
@@ -30,7 +30,7 @@ public class Bomb : ParapolBullet
     void Update()
     {
         CalTrajectory();
-        CalBulletSpeedAndAngle();
+        UpdateBulletSpeedAndAngle();
         OnReachTargetLastPos();
     }
 

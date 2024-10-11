@@ -968,7 +968,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  HpMax: 7
+  currentSpeed: 0
+  HpMax: 30
   HpCurrent: 0
   damage: 5
   isUnderDamgeEffect: 0
@@ -976,7 +977,6 @@ MonoBehaviour:
   previousPos: {x: 0, y: 0}
   direction: {x: 0, y: 0}
   healthBar: {fileID: 747040124858816785}
-  audioSource: {fileID: 0}
   soundEffectSO: {fileID: 0}
   enemyGold: 5
   currentPos: {x: 0, y: 0}

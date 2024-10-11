@@ -4,10 +4,9 @@ using UnityEngine;
 
 public abstract class ParapolBullet : BulletBase
 {
-    public LineRenderer lineRenderer;
+    //public LineRenderer lineRenderer;
     [HideInInspector] public Vector2 instantiatePoint;
     [HideInInspector] public int Trajectory_num = 50;
-    private Vector2 bulletLastPosition;
     private float initialAngleDeg;
     private float initialAngleRad;
     private float config = 0.1f;
@@ -30,7 +29,7 @@ public abstract class ParapolBullet : BulletBase
             float Y = V * Mathf.Sin(initialAngleRad) * time - 0.5f * gravity * time * time;
             Vector2 pos = instantiatePoint + new Vector2(X, Y);
 
-            lineRenderer.SetPosition(i, pos);
+            //lineRenderer.SetPosition(i, pos);
             if(trajectoryPoints.Count <= i)
             {
                 trajectoryPoints.Add(pos);
@@ -75,29 +74,30 @@ public abstract class ParapolBullet : BulletBase
         V = Mathf.Sqrt(v2);
     }
 
-    protected virtual void CalBulletSpeedAndAngle()
+    protected virtual void UpdateBulletSpeedAndAngle()
     {
-        if (bulletLastPosition != null)
+        if (bulletLastPos != null)
         {
-            if (bulletLastPosition != (Vector2)transform.position)
+            if (bulletLastPos != (Vector2)transform.position)
             {
-                CalArrowRotate();
+                CalBulletRotation();
                 AdjustSpeed();
             }     
         }
-        bulletLastPosition = transform.position;
+        bulletLastPos = transform.position;
     }
 
-    private void CalArrowRotate()
+    protected override void CalBulletRotation()
     {
-        Vector2 moveDir = bulletLastPosition - (Vector2)transform.position;
-        float tangentAngle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0, tangentAngle - 90), 3f);
+        // Vector2 moveDir = bulletLastPos - (Vector2)transform.position;
+        // float tangentAngle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+        // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0, tangentAngle - 90), 1f);
+        base.CalBulletRotation();
     }
 
     private void AdjustSpeed()
     {
-        if(bulletLastPosition.y > transform.position.y)
+        if(bulletLastPos.y > transform.position.y)
         {
             speedY = speed * 1.2f; 
         }
@@ -107,7 +107,7 @@ public abstract class ParapolBullet : BulletBase
         }
     }
 
-    protected override IEnumerator MoveProcess()
+    protected virtual IEnumerator MoveInParapolProcess()
     {        
         for (int i = 0; i < trajectoryPoints.Count; i++)
         {  

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &546487039215034529
 Transform:
   m_ObjectHideFlags: 0
@@ -225,12 +225,12 @@ SpriteRenderer:
   m_SortingLayerID: 977873889
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 88b911dfb7bf40a48ba0559f610ecfdc, type: 3}
+  m_Sprite: {fileID: 238786321, guid: c9c746ee77f3f7748b18e0e82964e474, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.53333336, y: 0.53333336}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -431,13 +431,12 @@ MonoBehaviour:
   damage: 3
   target: {fileID: 0}
   targetLastPos: {x: 0, y: 0}
-  spriteRenderer: {fileID: 0}
+  bulletLastPos: {x: 0, y: 0}
   trailRenderer: {fileID: 0}
   particle: {fileID: 0}
   audioSource: {fileID: 0}
   soundEffectSO: {fileID: 11400000, guid: 58f3b842f8497a046a2a1acaa17e7bc7, type: 2}
   dealDamageTimeAmount: 0.5
-  magicAnimation: {fileID: 0}
 --- !u!114 &3255971968985569217
 MonoBehaviour:
   m_ObjectHideFlags: 0

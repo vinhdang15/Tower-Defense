@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerBase : MonoBehaviour
+public abstract class TowerBase : MonoBehaviour
 {
     [Header("Tower Properties")]
     public int currentDamage;
@@ -137,10 +137,11 @@ public class TowerBase : MonoBehaviour
 
     public virtual void Upgrade(int level)
     {
-        // currentLevel = level;
-        // currentRange = detectionRanges[level];
-        // currentBulletPrefab = bulletPrefabs[level];
-        // currentSpawnPrefab = bulletPrefabs[level];  
+        currentLevel = level;
+        currentDamage = GetCurrentDamage(currentLevel);
+        currentSpawnRate = spawnRate[level];
+        currentRange = detectionRanges[level];
+        currentSpawnPrefab = spawnObjectPrefabs[level];
     }
 
     public virtual void TryUpgrade()

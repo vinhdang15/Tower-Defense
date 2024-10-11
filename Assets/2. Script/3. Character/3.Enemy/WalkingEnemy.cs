@@ -5,37 +5,44 @@ using UnityEngine;
 public class WalkingEnemy : Enemy
 {
     public Soldier soldier;
+    private PathFinder pathFinderScript;
+
+    private void Awake()
+    {
+        pathFinderScript = GetComponent<PathFinder>();
+    }
     
-    void Start()
+    private void Start()
     {
         currentPos = transform.position;
-        SetupHpCurrent();
+        base.SetDefaultSpeed();
+        base.SetupHpCurrent();
     }
 
-    void Update()
+    private void Update()
     {
         Move();
         SetEnemyDirection();
     }
 
-    public override void Move()
+    protected override void Move()
     {
         if(soldier == null && !base.IsDead())
         {
-            base.Move();
+            pathFinderScript.FollowPath(currentSpeed);
         }
     }
 
-    public bool NonSoldier()
+    public bool IsNonSoldier()
     {
         return soldier == null;
     }
+
     public bool IsSoldierApproach()
     {
         if(soldier == null) return false;
         else if(soldier.targetPosition != (Vector2)soldier.transform.position)
         {
-            Debug.Log($"{soldier.targetPosition} + {(Vector2)soldier.transform.position}");
             return true;
         }
         return false;
@@ -43,7 +50,6 @@ public class WalkingEnemy : Enemy
 
     public bool IsSoldierInfront()
     {
-        Debug.Log("there is soldier");
         if(soldier == null) return false;
         else if(soldier.targetPosition == (Vector2)soldier.transform.position) return true;
         return false;

@@ -15,17 +15,17 @@ public class Arrow : ParapolBullet
         audioSource = GetComponent<AudioSource>();
 
         instantiatePoint = transform.position;
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = Trajectory_num;
+        //lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer.positionCount = Trajectory_num;
         CalTrajectory();
-        CalBulletSpeedAndAngle();
-        moveBulletCoroutine = StartCoroutine(MoveProcess());
+        UpdateBulletSpeedAndAngle();
+        moveBulletCoroutine = StartCoroutine(MoveInParapolProcess());
     }
 
     void Update()
     {
         if(isReachTarget) return;
-        CalBulletSpeedAndAngle();
+        UpdateBulletSpeedAndAngle();
         CalTrajectory();
         if(IsReachTargetLastPos())
         {
@@ -36,18 +36,9 @@ public class Arrow : ParapolBullet
 
     protected override void OnReachTargetLastPos()
     {
-        // if(target != null) return;       
-        // if (IsReachTargetLastPos())
-        // {   
-        //     base.EnabeTrailRenderer();
-        //     StopCoroutine(moveBulletCoroutine);
-        //     animator.SetTrigger("IsHitGround");          
-        // }
         StopCoroutine(moveBulletCoroutine);
         base.EnabeTrailRenderer();
-        
-        
-        
+
         if(target != null)
         {
             StartCoroutine(PlaySoundAndDestroyWhenHit());

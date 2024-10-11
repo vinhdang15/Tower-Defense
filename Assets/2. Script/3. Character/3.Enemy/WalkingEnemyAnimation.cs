@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WalkingEnemyAnimation : CharacterAnimationBase
 {
-    WalkingEnemy thisEnemy;
+    private WalkingEnemy thisEnemy;
     protected override void Start()
     {
         base.Start();
@@ -12,11 +12,11 @@ public class WalkingEnemyAnimation : CharacterAnimationBase
         StartCoroutine(DoAnimation());
     }
 
-    IEnumerator DoAnimation()
+    private IEnumerator DoAnimation()
     {
         while(!thisEnemy.IsDead())
         {
-            if(thisEnemy.NonSoldier())
+            if(thisEnemy.IsNonSoldier())
             {
                 base.WalkingState();
                 //Debug.Log("walk");
@@ -29,7 +29,7 @@ public class WalkingEnemyAnimation : CharacterAnimationBase
             else if(thisEnemy.IsSoldierInfront())
             {
                 base.AttackingState();
-                Debug.Log("attack");
+                //Debug.Log("attack");
             }
             yield return new WaitForSeconds(0.1f);       
         }
